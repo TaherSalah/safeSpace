@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:safespaceapp/core/Theme/theme.dart';
 import 'package:safespaceapp/core/Widgets/default_text_widget.dart';
+
+import '../../../../core/Widgets/custom_button_widget.dart';
 
 class SplashItemBuilder extends StatelessWidget {
   const SplashItemBuilder({super.key});
@@ -7,6 +11,7 @@ class SplashItemBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      spacing: 40,
       children: [
         Stack(
           clipBehavior: Clip.none,
@@ -32,31 +37,38 @@ class SplashItemBuilder extends StatelessWidget {
                 color: Color(0xffFCDDEC),
               ),
             ),
-            Container(
-              child: Column(
-                children: [
-                  Center(
-                    child: TextDefaultWidget(
-                      title: "Let Us Help You",
-                      fontWeight: FontWeight.bold,
-                      FontFamily: "Bold",
-                      fontSize: 37,
-                      color: Colors.black,
-                    ),
-                  ),
-                  Center(
-                    child: TextDefaultWidget(
-                      title: "Let Us Help You",
-                      fontWeight: FontWeight.bold,
-                      FontFamily: "Bold",
-                      fontSize: 37,
-                      color: Colors.black,
-                    ),
-                  ),
-                ],
-              ),
-            ),
           ],
+        ),
+        Spacer(),
+        Container(
+          child: Column(
+            children: [
+              Center(
+                child: TextDefaultWidget(
+                  title: "Let Us Help You",
+                  fontWeight: FontWeight.bold,
+                  FontFamily: "Bold",
+                  fontSize: 37,
+                  color: Colors.black,
+                ),
+              ),
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: CustomButton(
+            verticalPadding: 10,
+            radius: 6.r,
+            title: "Login",
+            fontSize: 12.sp,
+            backgroundColor: ThemeClass.blueLightColor,
+            onTap: () async {
+              // if (_registerFormKey.currentState!.validate()) {
+              //   await register.register();
+              // }
+            },
+          ),
         ),
       ],
     );

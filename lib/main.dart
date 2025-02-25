@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:safespaceapp/core/Utilities/router.dart';
 
 void main() {
@@ -11,12 +12,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'safe space App',
-        initialRoute: Routes.splashRoute,
-        debugShowCheckedModeBanner: false,
-        onGenerateRoute: (settings) =>
-            RouteGenerator.getRoute(settings, context),
-        theme: ThemeData(useMaterial3: true));
+    return ScreenUtilInit(
+      designSize: Size(360, 690),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context, child) {
+        return MaterialApp(
+            title: 'safe space App',
+            initialRoute: Routes.splashRoute,
+            debugShowCheckedModeBanner: false,
+            onGenerateRoute: (settings) =>
+                RouteGenerator.getRoute(settings, context),
+            theme: ThemeData(useMaterial3: true));
+      },
+    );
   }
 }
