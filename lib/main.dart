@@ -1,9 +1,11 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:safespaceapp/core/Utilities/router.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -19,7 +21,7 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return MaterialApp(
             title: 'safe space App',
-            initialRoute: Routes.splashRoute,
+            initialRoute: Routes.onBoardingRoute,
             debugShowCheckedModeBanner: false,
             onGenerateRoute: (settings) =>
                 RouteGenerator.getRoute(settings, context),

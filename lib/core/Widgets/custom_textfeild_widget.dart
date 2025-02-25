@@ -72,6 +72,7 @@ class CustomTextFieldWidget extends StatelessWidget {
       child: TextFormField(
         // cursorHeight: 20.h,
         readOnly: readOnly ?? false,
+        autocorrect: true,
         textAlignVertical: TextAlignVertical.center,
         validator: validator,
         textDirection: TextDirection.ltr,

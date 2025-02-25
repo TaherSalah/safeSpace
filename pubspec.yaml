@@ -25,6 +25,9 @@ dependencies:
   flutter_svg: ^1.1.6
   dio: ^5.2.1+1
   google_sign_in: ^6.1.4
+  font_awesome_flutter: ^10.8.0
+  firebase_core: ^1.10.0
+  firebase_auth: ^3.3.3
 
 dev_dependencies:
   flutter_test:

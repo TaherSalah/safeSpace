@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ThemeClass {
   static Color primaryColor = const Color(0xffaeaff7);
+  static Color btnColor = const Color(0xff371B34);
   static Color accentColor = const Color(0xffE9C37);
   static Color whiteColor = const Color(0xffFFFFFF);
   static Color whiteDarkColor = const Color(0xffFAFBFA);

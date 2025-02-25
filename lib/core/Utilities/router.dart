@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:safespaceapp/features/view/splash/splash.dart';
+import 'package:safespaceapp/features/view/home/homeView.dart';
+import 'package:safespaceapp/features/view/login/loginView.dart';
+import 'package:safespaceapp/features/view/onboarding/onboardingView.dart';
 
 class Routes {
-  static const String splashRoute = "/";
-  static const String onBoardingRoute = "/onBoarding";
+  static const String splashRoute = "/splash";
+  static const String onBoardingRoute = "/";
   static const String loginRoute = "/login";
   static const String registerRout = "/register";
   static const String homeRoute = "/home";
@@ -17,8 +19,12 @@ class RouteGenerator {
     final arguments = settings.arguments;
 
     switch (settings.name) {
-      case Routes.splashRoute:
-        return MaterialPageRoute(builder: (_) => const SplashView());
+      case Routes.onBoardingRoute:
+        return MaterialPageRoute(builder: (_) => const OnboardingView());
+      case Routes.homeRoute:
+        return MaterialPageRoute(builder: (_) => const HomeView());
+      case Routes.loginRoute:
+        return MaterialPageRoute(builder: (_) => const Loginview());
       default:
         return unDefinedRoute();
     }
