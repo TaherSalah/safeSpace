@@ -1,5 +1,6 @@
-
+//
 //buildscript {
+//
 //    repositories {
 //        google()  // Required to fetch dependencies from Google's Maven repository
 //        mavenCentral()
@@ -12,14 +13,51 @@
 //        classpath 'com.google.gms:google-services:4.4.2'  // Ensure this matches the version you need
 //    }
 //}
+//
+//
+//allprojects {
+//    repositories {
+//        google()
+//        mavenCentral()
+//    }
+//
+//}
+//
+//rootProject.buildDir = "../build"
+//subprojects {
+//    project.buildDir = "${rootProject.buildDir}/${project.name}"
+//}
+//subprojects {
+//    project.evaluationDependsOn(":app")
+//}
+//
+//tasks.register("clean", Delete) {
+//    delete rootProject.buildDir
+//}
+buildscript {
+    ext.kotlin_version = '1.9.0'  // Updated to the latest version
 
+    repositories {
+        google()  // Required to fetch dependencies from Google's Maven repository
+        mavenCentral()
+    }
+    dependencies {
+        // The classpath for the Android Gradle plugin
+        classpath 'com.android.tools.build:gradle:7.4.0'  // Updated version
+
+        // The classpath for the Google Services Gradle plugin
+        classpath 'com.google.gms:google-services:4.4.2'  // Ensure this matches the version you need
+
+        // Add Kotlin classpath
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.0"  // Add this line with the latest version
+    }
+}
 
 allprojects {
     repositories {
         google()
         mavenCentral()
     }
-
 }
 
 rootProject.buildDir = "../build"
