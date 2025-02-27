@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return MaterialApp(
             title: 'safe space App',
-            initialRoute: Routes.onBoardingRoute,
+            initialRoute: Routes.mainRoute,
             debugShowCheckedModeBanner: false,
             onGenerateRoute: (settings) =>
                 RouteGenerator.getRoute(settings, context),

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:safe_space_app/features/view/main/main_view.dart';
-import 'package:safe_space_app/features/view/onboarding/onboardingView.dart';
+import 'package:safe_space_app/features/view/emergency/emergencyView.dart';
 import 'package:safe_space_app/features/view/home/homeView.dart';
 import 'package:safe_space_app/features/view/login/loginView.dart';
+import 'package:safe_space_app/features/view/main/mainView.dart';
 import 'package:safe_space_app/features/view/onboarding/onboardingView.dart';
+import 'package:safe_space_app/features/view/sound/soundView.dart';
 
 class Routes {
   static const String splashRoute = "/splash";
@@ -12,6 +13,8 @@ class Routes {
   static const String registerRout = "/register";
   static const String homeRoute = "/home";
   static const String mainRoute = "/main";
+  static const String emergencyRoute = "/emergency";
+  static const String soundRoute = "/sound";
 }
 
 class RouteGenerator {
@@ -28,8 +31,12 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const HomeView());
       case Routes.loginRoute:
         return MaterialPageRoute(builder: (_) => const Loginview());
-        case Routes.mainRoute:
+      case Routes.mainRoute:
         return MaterialPageRoute(builder: (_) => const MainView());
+      case Routes.emergencyRoute:
+        return MaterialPageRoute(builder: (_) => const EmergencyView());
+      case Routes.soundRoute:
+        return MaterialPageRoute(builder: (_) => const SoundView());
       default:
         return unDefinedRoute();
     }
