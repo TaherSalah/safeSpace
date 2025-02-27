@@ -105,7 +105,7 @@ class _MusicPlayerState extends State<MusicPlayer> {
             ],
           ),
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 5),
+            padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 5),
             child: TextDefaultWidget(
               title: "Calming  Playlist",
               color: Colors.black,
@@ -113,8 +113,12 @@ class _MusicPlayerState extends State<MusicPlayer> {
               fontSize: 22.sp,
             ),
           ),
-          Image.asset(actorImageUrl),
-          SizedBox(height: 30),
+          SizedBox(height: 25.h),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 25.w),
+            child: Image.asset(actorImageUrl),
+          ),
+          SizedBox(height: 60.h),
           // Slider(
           //   value: _currentPosition,
           //   min: 0.0,
