@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:safespaceapp/features/view/home/widget/homeViewItemBuilder.dart';
+import 'package:safe_space_app/features/view/home/widget/homeViewItemBuilder.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -7,7 +7,7 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: HomeViewItemBuilder(),
+      body: SafeArea(child: HomeViewItemBuilder()),
     );
   }
 }

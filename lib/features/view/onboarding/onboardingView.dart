@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:safespaceapp/features/view/onboarding/widget/onboardingItemBuilder.dart';
+import 'package:safe_space_app/features/view/onboarding/widget/onboardingItemBuilder.dart';
 
 class OnboardingView extends StatelessWidget {
   const OnboardingView({super.key});

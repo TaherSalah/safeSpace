@@ -1,4 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
@@ -20,7 +20,7 @@ class LoginController extends ControllerMVC {
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  final _auth = FirebaseAuth.instance;
+  // final _auth = FirebaseAuth.instance;
   final loginFormKey = GlobalKey<FormState>();
   String? errorMessage;
   bool isVisible = false;
@@ -40,26 +40,26 @@ class LoginController extends ControllerMVC {
   // }
   // Method to handle login
   Future<void> login() async {
-    try {
-      // Attempt to sign in with email and password
-      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
-        email: emailController.text,
-        password: passwordController.text,
-      );
-
-      // Handle successful login
-      if (userCredential.user != null) {
-        // Navigate to home screen or another page
-        // Navigator.pushReplacementNamed(context, '/home');
-        print('Login successful: ${userCredential.user?.email}');
-      }
-    } on FirebaseAuthException catch (e) {
-      // Handle errors
-      setState(() {
-        errorMessage = e.message ?? 'An error occurred';
-      });
-      print('Error: ${e.message}');
-    }
+    // try {
+    //   // Attempt to sign in with email and password
+    //   UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+    //     email: emailController.text,
+    //     password: passwordController.text,
+    //   );
+    //
+    //   // Handle successful login
+    //   if (userCredential.user != null) {
+    //     // Navigate to home screen or another page
+    //     // Navigator.pushReplacementNamed(context, '/home');
+    //     print('Login successful: ${userCredential.user?.email}');
+    //   }
+    // } on FirebaseAuthException catch (e) {
+    //   // Handle errors
+    //   setState(() {
+    //     errorMessage = e.message ?? 'An error occurred';
+    //   });
+    //   print('Error: ${e.message}');
+    // }
   }
 
   // Update password visibility toggle

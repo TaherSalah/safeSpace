@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:safespaceapp/core/Utilities/k_color.dart';
-import 'package:safespaceapp/core/Utilities/router.dart';
-import 'package:safespaceapp/core/Widgets/default_text_widget.dart';
+import 'package:safe_space_app/core/Utilities/k_color.dart';
+import 'package:safe_space_app/core/Utilities/router.dart';
+import 'package:safe_space_app/core/Widgets/default_text_widget.dart';
 
 import '../../../../core/Widgets/custom_button_widget.dart';
 

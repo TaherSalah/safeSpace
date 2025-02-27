@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
-import 'package:safespaceapp/core/Utilities/k_color.dart';
-import 'package:safespaceapp/core/Widgets/custom_button_widget.dart';
-import 'package:safespaceapp/core/Widgets/custom_textfeild_widget.dart';
-import 'package:safespaceapp/core/Widgets/default_text_widget.dart';
-import 'package:safespaceapp/features/viewModel/login_controllar.dart';
+import 'package:safe_space_app/core/Utilities/k_color.dart';
+import 'package:safe_space_app/core/Utilities/router.dart';
+import 'package:safe_space_app/core/Widgets/custom_button_widget.dart';
+import 'package:safe_space_app/core/Widgets/custom_textfeild_widget.dart';
+import 'package:safe_space_app/core/Widgets/default_text_widget.dart';
+import 'package:safe_space_app/features/viewModel/login_controllar.dart';
 
 class LoginViewBuilder extends StatefulWidget {
   const LoginViewBuilder({super.key});
@@ -128,10 +129,11 @@ class _LoginViewBuilderState extends StateMVC<LoginViewBuilder> {
                 fontWeight: FontWeight.w700,
                 backgroundColor: KColors.KBtn,
                 onTap: () async {
-                  if (con.loginFormKey.currentState!.validate()) {
-                    // You can add your login logic here
-                    con.login();
-                  }
+                  // if (con.loginFormKey.currentState!.validate()) {
+                  //   // You can add your login logic here
+                  //   con.login();
+                  // }
+                  Navigator.pushNamed(context, Routes.mainRoute);
                 },
               ),
             ),

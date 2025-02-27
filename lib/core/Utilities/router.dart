@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:safespaceapp/features/view/home/homeView.dart';
-import 'package:safespaceapp/features/view/login/loginView.dart';
-import 'package:safespaceapp/features/view/onboarding/onboardingView.dart';
+import 'package:safe_space_app/features/view/main/main_view.dart';
+import 'package:safe_space_app/features/view/onboarding/onboardingView.dart';
+import 'package:safe_space_app/features/view/home/homeView.dart';
+import 'package:safe_space_app/features/view/login/loginView.dart';
+import 'package:safe_space_app/features/view/onboarding/onboardingView.dart';
 
 class Routes {
   static const String splashRoute = "/splash";
@@ -9,6 +11,7 @@ class Routes {
   static const String loginRoute = "/login";
   static const String registerRout = "/register";
   static const String homeRoute = "/home";
+  static const String mainRoute = "/main";
 }
 
 class RouteGenerator {
@@ -25,6 +28,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const HomeView());
       case Routes.loginRoute:
         return MaterialPageRoute(builder: (_) => const Loginview());
+        case Routes.mainRoute:
+        return MaterialPageRoute(builder: (_) => const MainView());
       default:
         return unDefinedRoute();
     }

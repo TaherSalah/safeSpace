@@ -4,7 +4,6 @@ import 'shared_obj.dart';
 
 class SharedPref {
   static const String _userObj = "userObj";
-  static const String _userSubjects = "userSubjects";
   static const String _language = "language_code";
   static const String _deviceId = "device_id";
 
