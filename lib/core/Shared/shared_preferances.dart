@@ -8,6 +8,7 @@ class SharedPref {
   static const String _deviceId = "device_id";
 
   static const String _intro = "intro";
+  static const String _isEmergencyUser = "isEmergencyUser";
 
   // static Future<bool?> saveUserObj({required User user}) async {
   //   return await SharedObj().prefs?.setString(_userObj, jsonEncode(user.toJson()));
@@ -68,5 +69,13 @@ class SharedPref {
 
   static bool isWatchIntro() {
     return SharedObj().prefs?.getBool(_intro) ?? false;
+  }
+
+  static Future<void> saveIsEmergencyUser(bool isEmergencyUser) async {
+    await SharedObj().prefs?.setBool(_isEmergencyUser, isEmergencyUser);
+  }
+
+  static bool getIsEmergencyUser() {
+    return SharedObj().prefs?.getBool(_isEmergencyUser) ?? false;
   }
 }

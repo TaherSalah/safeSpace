@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:safe_space_app/core/Utilities/k_color.dart';
-import 'package:safe_space_app/core/Utilities/router.dart';
 import 'package:safe_space_app/core/Widgets/custom_button_widget.dart';
 import 'package:safe_space_app/core/Widgets/custom_textfeild_widget.dart';
 import 'package:safe_space_app/core/Widgets/default_text_widget.dart';
@@ -65,6 +64,7 @@ class _LoginViewBuilderState extends StateMVC<LoginViewBuilder> {
             ),
             SizedBox(height: 20.h),
             CustomTextFieldWidget(
+              controller: con.emailController,
               validator: (val) {
                 if (val!.trim().isEmpty) {
                   return "please enter your email ";
@@ -129,11 +129,11 @@ class _LoginViewBuilderState extends StateMVC<LoginViewBuilder> {
                 fontWeight: FontWeight.w700,
                 backgroundColor: KColors.KBtn,
                 onTap: () async {
-                  // if (con.loginFormKey.currentState!.validate()) {
-                  //   // You can add your login logic here
-                  //   con.login();
-                  // }
-                  Navigator.pushNamed(context, Routes.mainRoute);
+                  if (con.loginFormKey.currentState!.validate()) {
+                    // You can add your login logic here
+                    con.login(context);
+                  }
+                  // Navigator.pushNamed(context, Routes.mainRoute);
                 },
               ),
             ),

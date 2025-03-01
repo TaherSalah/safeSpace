@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../Theme/theme.dart';
+import 'package:safe_space_app/core/Utilities/Theme/theme.dart';
 
 class TextDefaultWidget extends StatelessWidget {
   const TextDefaultWidget({
@@ -51,60 +49,6 @@ class TextDefaultWidget extends StatelessWidget {
       maxLines: maxLines ?? 5,
       overflow: textOverflow ?? TextOverflow.ellipsis,
       textAlign: textAlign,
-    );
-  }
-}
-
-class GradientTextWidget extends StatelessWidget {
-  const GradientTextWidget({
-    super.key,
-    required this.title,
-    this.fontSize,
-    this.fontWeight,
-    this.color,
-    this.maxlines,
-    this.gradientColors = const LinearGradient(
-      colors: <Color>[
-        Color(0xff42DEBF),
-        Color(0xff6CA5C2),
-        Color(0xff4876B2),
-        Color(0xff315FAA),
-      ],
-    ),
-  });
-
-  final String title;
-  final Gradient gradientColors;
-  final int? maxlines;
-
-  // = LinearGradient(
-  //   colors: <Color>[
-  //     Color(0xff42DEBF),
-  //     Color(0xff6CA5C2),
-  //     Color(0xff4876B2),
-  //     Color(0xff315FAA),
-  //   ],
-  // );
-  final double? fontSize;
-  final FontWeight? fontWeight;
-  final Color? color;
-
-  @override
-  Widget build(BuildContext context) {
-    return ShaderMask(
-      blendMode: BlendMode.srcIn,
-      shaderCallback: (bounds) => gradientColors.createShader(
-        Rect.fromLTWH(0, 0, bounds.width, bounds.height),
-      ),
-      child: Text(
-        title,
-        style: TextStyle(
-          fontSize: fontSize ?? 16.sp,
-          fontWeight: fontWeight ?? FontWeight.w500,
-          color: color ?? ThemeClass.blackColor,
-        ),
-        maxLines: maxlines,
-      ),
     );
   }
 }

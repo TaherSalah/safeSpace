@@ -1,6 +1,8 @@
 // import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
+import 'package:safe_space_app/core/Shared/shared_preferances.dart';
+import 'package:safe_space_app/core/Utilities/router.dart';
 
 class LoginController extends ControllerMVC {
   // factory LoginController() {
@@ -39,7 +41,14 @@ class LoginController extends ControllerMVC {
   //       "Login attempt with email: ${loginEmailController.text} and password: ${loginPasswordController.text}");
   // }
   // Method to handle login
-  Future<void> login() async {
+  Future<void> login(BuildContext context) async {
+    if (emailController.text == "taher" && passwordController.text == "1") {
+      Navigator.pushNamed(context, Routes.mainRoute);
+    } else {
+      SharedPref.saveIsEmergencyUser(true);
+      Navigator.pushNamed(context, Routes.mainRoute);
+    }
+
     // try {
     //   // Attempt to sign in with email and password
     //   UserCredential userCredential = await _auth.signInWithEmailAndPassword(

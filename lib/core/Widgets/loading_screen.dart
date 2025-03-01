@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../../Theme/theme.dart';
+import 'package:safe_space_app/core/Utilities/Theme/theme.dart';
 
 class LoadingScreen extends StatelessWidget {
   final Widget child;
   final bool loading, withDropdown;
-  const LoadingScreen({Key? key, required this.child, this.loading = false,  this.withDropdown=false})
+  const LoadingScreen(
+      {Key? key,
+      required this.child,
+      this.loading = false,
+      this.withDropdown = false})
       : super(key: key);
 
   @override
@@ -29,15 +31,18 @@ class LoadingScreen extends StatelessWidget {
           loading
               ? Positioned(
                   child:
-                  // Container(
-                  //     decoration: BoxDecoration(color: ThemeClass.primaryColor),
-                  //     child: Image.asset(
-                  //       "assets/images/Guidlle.gif",
-                  //       height: 150.h,
-                  //       width: 250.w,
-                  //     )),
-                  CircularProgressIndicator(
-                      color:withDropdown ==true ?Colors.transparent: ThemeClass.primaryColor, ),
+                      // Container(
+                      //     decoration: BoxDecoration(color: ThemeClass.primaryColor),
+                      //     child: Image.asset(
+                      //       "assets/images/Guidlle.gif",
+                      //       height: 150.h,
+                      //       width: 250.w,
+                      //     )),
+                      CircularProgressIndicator(
+                    color: withDropdown == true
+                        ? Colors.transparent
+                        : ThemeClass.primaryColor,
+                  ),
                 )
               : const SizedBox(),
         ],

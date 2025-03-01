@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "215436311561",
+    "firebase_url": "https://measure-heart-rate-default-rtdb.firebaseio.com",
+    "project_id": "measure-heart-rate",
+    "storage_bucket": "measure-heart-rate.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:215436311561:android:905d9577e7fcacae2a8cd8",
+        "android_client_info": {
+          "package_name": "com.example.safespaceapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRdZ3GLI-mvIGbPhOe5wX9oWrmUoGphBQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

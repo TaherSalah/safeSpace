@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:safe_space_app/core/Shared/shared_preferances.dart';
 import 'package:safe_space_app/core/Utilities/k_color.dart';
 import 'package:safe_space_app/core/Utilities/router.dart';
 import 'package:safe_space_app/core/Widgets/default_text_widget.dart';
@@ -67,6 +68,7 @@ class OnboardingItemBuilder extends StatelessWidget {
             backgroundColor: KColors.KBtn,
             onTap: () async {
               Navigator.pushNamed(context, Routes.loginRoute);
+              SharedPref.saveIsEmergencyUser(false);
             },
           ),
         ),
