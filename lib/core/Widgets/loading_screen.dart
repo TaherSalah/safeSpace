@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:safe_space_app/core/Utilities/Theme/theme.dart';
+import 'package:safe_space_app/core/Utilities/k_color.dart';
 
 class LoadingScreen extends StatelessWidget {
   final Widget child;
@@ -41,7 +41,7 @@ class LoadingScreen extends StatelessWidget {
                       CircularProgressIndicator(
                     color: withDropdown == true
                         ? Colors.transparent
-                        : ThemeClass.primaryColor,
+                        : KColors.KScondary,
                   ),
                 )
               : const SizedBox(),

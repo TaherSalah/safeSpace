@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:safe_space_app/core/Utilities/router.dart';
 import 'package:safe_space_app/core/Widgets/default_text_widget.dart';
+import 'package:safe_space_app/features/view/monitor/monitorHeartView.dart';
 
 class HomeViewItemBuilder extends StatelessWidget {
   const HomeViewItemBuilder({super.key});
@@ -35,9 +36,15 @@ class HomeViewItemBuilder extends StatelessWidget {
             ),
           ),
           CardItemBuilderWidget(
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => MonitorHeartView()));
+            },
               title: "Monitor heartbeat rate",
               iconPath: "assets/images/Vector.png"),
           CardItemBuilderWidget(
+            onTap: () {
+
+            },
               title: "Breathing techniques",
               iconPath: "assets/images/Meditation.png"),
           CardItemBuilderWidget(

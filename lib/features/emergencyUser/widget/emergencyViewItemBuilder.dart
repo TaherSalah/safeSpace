@@ -42,7 +42,7 @@ class EmergencyViewItemBuilder extends StatelessWidget {
               iconPath: "assets/images/Meetup Icon.png"),
           CardItemBuilderWidget(
               title: "Panic attack guidelines",
-              iconPath: "assets/images/Book open.png"),
+              iconPath: "assets/images/BookOpen.png"),
         ],
       ),
     );

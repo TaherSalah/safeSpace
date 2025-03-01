@@ -15,9 +15,11 @@ class OnboardingItemBuilder extends StatelessWidget {
     return Column(
       spacing: 10,
       children: [
+        SizedBox(height: 15),
         Stack(
           clipBehavior: Clip.none,
           children: [
+
             Center(
               child: TextDefaultWidget(
                 title: "SafeSpace",
@@ -42,21 +44,24 @@ class OnboardingItemBuilder extends StatelessWidget {
           ],
         ),
         Spacer(),
-        Column(
-          children: [
-            Center(
-              child: TextDefaultWidget(
-                title: "Let Us Help You",
-                fontWeight: FontWeight.w600,
-                FontFamily: "Medium",
-                fontSize: 25,
-                color: KColors.KScondary,
+        Padding(
+          padding: const EdgeInsets.only(bottom: 10),
+          child: Column(
+            children: [
+              Center(
+                child: TextDefaultWidget(
+                  title: "Let Us Help You",
+                  fontWeight: FontWeight.w600,
+                  FontFamily: "Medium",
+                  fontSize: 25,
+                  color: KColors.KScondary,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
         Container(
-          padding: EdgeInsets.symmetric(vertical: 10),
+          padding: EdgeInsets.only(bottom: 35),
           width: MediaQuery.sizeOf(context).width / 1.7,
           child: CustomButton(
             verticalPadding: 20,

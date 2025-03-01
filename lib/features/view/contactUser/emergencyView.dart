@@ -1,0 +1,63 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:safe_space_app/core/Utilities/k_color.dart';
+import 'package:safe_space_app/core/Utilities/toast_helper.dart';
+import 'package:safe_space_app/core/Widgets/default_text_widget.dart';
+import 'package:safe_space_app/features/view/home/widget/homeViewItemBuilder.dart';
+
+class ContactView extends StatelessWidget {
+  const ContactView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: TextDefaultWidget(title: "Contact"),
+      ),
+        body: SafeArea(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // TextDefaultWidget(title: "Contact User"),
+            
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                InkWell(
+                  onTap: () {
+                    ToastHelper.showSuccess(message: "Help");
+
+                  },
+                  child: Card(
+                    color: KColors.KBtn2,
+                    child: Padding(
+                      padding:  EdgeInsets.symmetric(horizontal: 30.w,vertical: 10.h),
+                      child: TextDefaultWidget(title: "Help",fontWeight: FontWeight.bold,),
+                    ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+ToastHelper.showSuccess(message: "Busy");
+                  },
+                  child: Card(
+                    color: KColors.KBtn2,
+                    child: Padding(
+                      padding:  EdgeInsets.symmetric(horizontal: 30.w,vertical: 10.h),
+                      child: TextDefaultWidget(title: "Busy",fontWeight: FontWeight.bold,),
+                    ),
+                  ),
+                ),
+              ],
+            )
+            
+          ],
+        ),
+      ),
+    ));
+  }
+}

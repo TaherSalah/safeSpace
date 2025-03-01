@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:safe_space_app/core/Utilities/Theme/theme.dart';
 
 class TextDefaultWidget extends StatelessWidget {
   const TextDefaultWidget({
@@ -38,7 +37,7 @@ class TextDefaultWidget extends StatelessWidget {
           height: height,
           fontSize: fontSize ?? 16,
           fontWeight: fontWeight ?? FontWeight.w500,
-          color: color ?? ThemeClass.whiteColor,
+          color: color ?? Colors.black,
           textBaseline: textBaseline,
           fontFamily: FontFamily ?? "RegularAr",
           foreground: gradientColors,

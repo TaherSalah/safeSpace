@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:safe_space_app/features/view/contactUser/emergencyView.dart';
 import 'package:safe_space_app/features/view/home/widget/homeViewItemBuilder.dart';
 
 class EmergencyView extends StatelessWidget {
@@ -26,6 +27,10 @@ class EmergencyView extends StatelessWidget {
               ),
             ),
             CardItemBuilderWidget(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ContactView(),));
+
+              },
                 title: "Contact with Taher Salah",
                 iconPath: "assets/images/Message circle.png"),
             CardItemBuilderWidget(
