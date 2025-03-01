@@ -101,7 +101,7 @@ class GradientTextWidget extends StatelessWidget {
         style: TextStyle(
           fontSize: fontSize ?? 16.sp,
           fontWeight: fontWeight ?? FontWeight.w500,
-          color: color ?? ThemeClass.whiteColor,
+          color: color ?? ThemeClass.blackColor,
         ),
         maxLines: maxlines,
       ),

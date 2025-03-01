@@ -17,7 +17,6 @@ class Routes {
   static const String emergencyRoute = "/emergency";
   static const String soundRoute = "/sound";
   static const String chatRoute = "/chat";
-
 }
 
 class RouteGenerator {
@@ -40,8 +39,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const EmergencyView());
       case Routes.soundRoute:
         return MaterialPageRoute(builder: (_) => const SoundView());
-         case Routes.chatRoute:
-        return MaterialPageRoute(builder: (_) => const Chatview());
+      case Routes.chatRoute:
+        return MaterialPageRoute(builder: (_) => Chatview());
       default:
         return unDefinedRoute();
     }

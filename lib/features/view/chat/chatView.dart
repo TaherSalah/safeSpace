@@ -1,47 +1,119 @@
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
+import 'package:safe_space_app/core/Utilities/k_color.dart';
 import 'package:safe_space_app/features/viewModel/chat_controllar.dart';
 
 class Chatview extends StatefulWidget {
   const Chatview({super.key});
 
   @override
-  State<StatefulWidget> createState() => _ChatViewBuilderState();
+  ChatviewState createState() => ChatviewState();
 }
 
-class _ChatViewBuilderState extends StateMVC<Chatview> {
-  /// Let the 'business logic' run in a Controller
-  _ChatViewBuilderState() : super(ChatController()) {
-    /// Acquire a reference to the passed Controller.
-    con = controller as ChatController;
-  }
+class ChatviewState extends StateMVC<Chatview> {
   late ChatController con;
 
-  @override
-  void initState() {
-    super.initState();
-    // Ensure appState is initialized before using it
-    if (rootState != null) {
-      appState = rootState!;
-      var con = appState.controller;
-      // Retrieve the correct controller by type or ID
-      con = appState.controllerByType<ChatController>();
-      con = appState.controllerById(con?.keyId);
-    } else {
-      // Handle the case where rootState is not initialized
-      print('rootState is null');
-    }
+  ChatviewState() : super(ChatController()) {
+    con = controller as ChatController;
+    ();
+    con.initServices(); // ✅ Initialize speech-to-text and TTS on load
   }
-}
 
-late AppStateMVC appState;
-
-class _ChatviewState extends State<Chatview> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: Column(),
+      appBar: AppBar(title: const Text("GPT Chatbot")),
+      body: Column(
+        children: [
+          Expanded(
+            child: ListView.builder(
+              controller: con.scrollController,
+              itemCount: con.messages.length + (con.isLoading ? 1 : 0),
+              itemBuilder: (context, index) {
+                if (index == con.messages.length && con.isLoading) {
+                  return Align(
+                    alignment: Alignment.centerLeft,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width: 25,
+                            height: 25,
+                            child: CircularProgressIndicator(strokeWidth: 2),
+                          ),
+                          const SizedBox(width: 10),
+                          const Text("Typing...",
+                              style: TextStyle(fontStyle: FontStyle.italic)),
+                        ],
+                      ),
+                    ),
+                  );
+                }
+                var msg = con.messages[index];
+                return Align(
+                  alignment: msg["role"] == "user"
+                      ? Alignment.centerRight
+                      : Alignment.centerLeft,
+                  child: Container(
+                    margin:
+                        const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: msg["role"] == "user"
+                          ? KColors.primaryColor
+                          : Colors.grey[300],
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Text(
+                      msg["content"] ?? "",
+                      style: TextStyle(
+                        color:
+                            msg["role"] == "user" ? Colors.white : Colors.black,
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    controller: con.controller,
+                    decoration: const InputDecoration(
+                      hintText: "Type a message...",
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                ),
+                IconButton(
+                  icon: Icon(con.isListening ? Icons.mic : Icons.mic_none,
+                      color: con.isListening ? Colors.red : Colors.black),
+                  onPressed: () {
+                    if (con.isListening) {
+                      con.stopListening();
+                    } else {
+                      con.startListening();
+                    }
+                    setState(() {}); // ✅ Update mic icon
+                  },
+                ),
+                IconButton(
+                  icon: Icon(
+                    Icons.send,
+                    color: KColors.primaryColor,
+                  ),
+                  onPressed: con.sendMessage,
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
