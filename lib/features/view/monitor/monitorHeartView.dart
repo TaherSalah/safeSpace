@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:safe_space_app/core/Widgets/default_text_widget.dart';
 import 'package:safe_space_app/features/view/home/widget/homeViewItemBuilder.dart';
 
 class MonitorHeartView extends StatelessWidget {
@@ -10,6 +11,7 @@ class MonitorHeartView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: TextDefaultWidget(title: "Monitor Heartbeat Rate"),),
         body: SafeArea(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
@@ -72,6 +74,7 @@ class _HeartRateBuilderState extends State<HeartRateBuilder>
               return Transform.scale(
                 scale: _scaleAnimation.value,
                 child: Stack(
+                  
                   alignment: Alignment.center,
                   children: [
                     // Heart background glow effect

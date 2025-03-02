@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:safe_space_app/features/view/chat/chatView.dart';
 import 'package:safe_space_app/features/view/emergency/emergencyView.dart';
+import 'package:safe_space_app/features/view/emergencyUser/emergencyUser.dart';
 import 'package:safe_space_app/features/view/home/homeView.dart';
 import 'package:safe_space_app/features/view/login/loginView.dart';
 import 'package:safe_space_app/features/view/main/mainView.dart';
 import 'package:safe_space_app/features/view/onboarding/onboardingView.dart';
 import 'package:safe_space_app/features/view/sound/soundView.dart';
-
-import '../../features/emergencyUser/emergencyUser.dart';
 
 class Routes {
   static const String splashRoute = "/splash";

@@ -19,15 +19,13 @@ class OnboardingItemBuilder extends StatelessWidget {
         Stack(
           clipBehavior: Clip.none,
           children: [
-
             Center(
               child: TextDefaultWidget(
-                title: "SafeSpace",
-                fontWeight: FontWeight.bold,
-                FontFamily: "Bold",
-                fontSize: 37,
-                color: Colors.black,
-              ),
+                  title: "SafeSpace",
+                  fontWeight: FontWeight.bold,
+                  FontFamily: "Bold",
+                  fontSize: 37,
+                  color: Colors.black),
             ),
             // This non-positioned child gives the Stack finite height.
             SizedBox(

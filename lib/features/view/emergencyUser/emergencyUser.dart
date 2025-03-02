@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:safe_space_app/features/emergencyUser/widget/emergencyViewItemBuilder.dart';
+import 'package:safe_space_app/features/view/emergencyUser/widget/emergencyViewItemBuilder.dart';
 
 class EmergencyUser extends StatelessWidget {
   const EmergencyUser({super.key});
