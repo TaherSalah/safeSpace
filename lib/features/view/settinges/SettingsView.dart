@@ -9,32 +9,32 @@ class SettingsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       // backgroundColor: Color(0xffaeaff7),
       body: SafeArea(
           child: Column(
-        children: [TextDefaultWidget(title: "SettingsView"),
-        SizedBox(height: 10),
-        InkWell(
-          onTap: () {
-Navigator.pushReplacementNamed(context, Routes.onBoardingRoute);
-SharedPref.saveIsEmergencyUser(false);
-
-          },
-          child: Card(
-            elevation: 5,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 11),
-              child: Row(
-                children: [
-                TextDefaultWidget(title: "logout"),
-                  Spacer(),
-                  Icon(Icons.logout)
-                ],
+        children: [
+          TextDefaultWidget(title: "SettingsView"),
+          SizedBox(height: 10),
+          InkWell(
+            onTap: () {
+              Navigator.pushReplacementNamed(context, Routes.onBoardingRoute);
+              SharedPref.saveIsEmergencyUser(false);
+            },
+            child: Card(
+              elevation: 5,
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 11),
+                child: Row(
+                  children: [
+                    TextDefaultWidget(title: "logout"),
+                    Spacer(),
+                    Icon(Icons.logout)
+                  ],
+                ),
               ),
             ),
-          ),
-        )
+          )
         ],
       )),
     );

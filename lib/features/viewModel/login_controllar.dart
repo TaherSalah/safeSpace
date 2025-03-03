@@ -1,8 +1,10 @@
 // import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:safe_space_app/core/Shared/shared_preferances.dart';
-import 'package:safe_space_app/core/Utilities/router.dart';
+
+import '../../core/Utilities/router.dart';
 
 class LoginController extends ControllerMVC {
   // factory LoginController() {
@@ -22,7 +24,7 @@ class LoginController extends ControllerMVC {
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  // final _auth = FirebaseAuth.instance;
+  final _auth = FirebaseAuth.instance;
   final loginFormKey = GlobalKey<FormState>();
   String? errorMessage;
   bool isVisible = false;
@@ -35,40 +37,31 @@ class LoginController extends ControllerMVC {
     super.dispose();
   }
 
-  // login(BuildContext context) {
-  //   // You can add your login logic here
-  //   print(
-  //       "Login attempt with email: ${loginEmailController.text} and password: ${loginPasswordController.text}");
-  // }
-  // Method to handle login
   Future<void> login(BuildContext context) async {
-    if (emailController.text == "taher" && passwordController.text == "1") {
-      Navigator.pushNamed(context, Routes.mainRoute);
-    } else {
-      SharedPref.saveIsEmergencyUser(true);
-      Navigator.pushNamed(context, Routes.mainRoute);
+    try {
+      // Attempt to sign in with email and password
+      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+      // Handle successful login
+      if (userCredential.user != null) {
+        if (userCredential.user?.email == "user2@yahoo.com") {
+          SharedPref.saveIsEmergencyUser(true);
+          Navigator.pushNamed(context, Routes.mainRoute);
+        } else {
+          SharedPref.saveIsEmergencyUser(false);
+          Navigator.pushNamed(context, Routes.mainRoute);
+        }
+        print('Login successful: ${userCredential.user?.email}');
+      }
+    } on FirebaseAuthException catch (e) {
+      // Handle errors
+      setState(() {
+        errorMessage = e.message ?? 'An error occurred';
+      });
+      print('Error: ${e.message}');
     }
-
-    // try {
-    //   // Attempt to sign in with email and password
-    //   UserCredential userCredential = await _auth.signInWithEmailAndPassword(
-    //     email: emailController.text,
-    //     password: passwordController.text,
-    //   );
-    //
-    //   // Handle successful login
-    //   if (userCredential.user != null) {
-    //     // Navigate to home screen or another page
-    //     // Navigator.pushReplacementNamed(context, '/home');
-    //     print('Login successful: ${userCredential.user?.email}');
-    //   }
-    // } on FirebaseAuthException catch (e) {
-    //   // Handle errors
-    //   setState(() {
-    //     errorMessage = e.message ?? 'An error occurred';
-    //   });
-    //   print('Error: ${e.message}');
-    // }
   }
 
   // Update password visibility toggle

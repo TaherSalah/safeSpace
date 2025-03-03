@@ -1,4 +1,4 @@
-package com.example.safe_space_app
+package com.example.safespaceapp
 
 import io.flutter.embedding.android.FlutterActivity
 
