@@ -19,7 +19,7 @@ class MainController extends ControllerMVC {
         ]
       : [
           HomeView(),
-          EmergencyView(),
+          FirebaseData(),
           SoundView(),
           SettingsView(),
         ];
