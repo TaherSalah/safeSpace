@@ -2,9 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:safe_space_app/core/Utilities/router.dart';
 import 'package:safe_space_app/core/Widgets/default_text_widget.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class EmergencyViewItemBuilder extends StatelessWidget {
+class EmergencyViewItemBuilder extends StatefulWidget {
   const EmergencyViewItemBuilder({super.key});
+
+  @override
+  State<EmergencyViewItemBuilder> createState() =>
+      _EmergencyViewItemBuilderState();
+}
+
+class _EmergencyViewItemBuilderState extends State<EmergencyViewItemBuilder> {
+  String url({required String longitude, latitude}) =>
+      //       //  طول//
+      "https://www.google.com/maps/place/$latitude,$longitude";
+
+  Future<void> _launchURL() async {
+    Uri uri = Uri.parse(url(longitude: "31.32288", latitude: "30.31141"));
+    if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+      throw "Could not launch $url";
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +59,10 @@ class EmergencyViewItemBuilder extends StatelessWidget {
               },
               iconPath: "assets/images/Meetup Icon.png"),
           CardItemBuilderWidget(
+              onTap: () async {
+                _launchURL;
+                print("object");
+              },
               title: "Panic attack guidelines",
               iconPath: "assets/images/BookOpen.png"),
         ],

@@ -36,15 +36,16 @@ class HomeViewItemBuilder extends StatelessWidget {
             ),
           ),
           CardItemBuilderWidget(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => MonitorHeartView()));
-            },
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => MonitorHeartView()));
+              },
               title: "Monitor heartbeat rate",
               iconPath: "assets/images/Vector.png"),
           CardItemBuilderWidget(
-            onTap: () {
-
-            },
+              onTap: () {},
               title: "Breathing techniques",
               iconPath: "assets/images/Meditation.png"),
           CardItemBuilderWidget(

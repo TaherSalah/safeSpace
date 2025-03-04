@@ -29,4 +29,14 @@ class MainController extends ControllerMVC {
       currentIndex = index;
     });
   }
+
+  Future<void> getUserDetails() async {
+    Map<String, dynamic>? user = await SharedPref.getUserObj();
+    if (user != null) {
+      print('User Email: ${user["email"]}');
+      print('User UID: ${user["uid"]}');
+    } else {
+      print('No user data found');
+    }
+  }
 }

@@ -18,7 +18,7 @@ class SettingsView extends StatelessWidget {
           InkWell(
             onTap: () {
               Navigator.pushReplacementNamed(context, Routes.onBoardingRoute);
-              SharedPref.saveIsEmergencyUser(false);
+              SharedPref.saveIsUserLogin(false);
             },
             child: Card(
               elevation: 5,

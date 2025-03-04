@@ -39,6 +39,7 @@ class _MainViewBuilderState extends StateMVC<MainView> {
   late AppStateMVC appState;
   @override
   Widget build(BuildContext context) {
+    con.getUserDetails();
     return Scaffold(
       bottomNavigationBar: BottomNavigationBarWidget(
         onTap: (index) {

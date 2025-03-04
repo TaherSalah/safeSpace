@@ -39,24 +39,33 @@ class LoginController extends ControllerMVC {
 
   Future<void> login(BuildContext context) async {
     try {
-      // Attempt to sign in with email and password
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(
-        email: emailController.text,
-        password: passwordController.text,
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
       );
-      // Handle successful login
+
       if (userCredential.user != null) {
-        if (userCredential.user?.email == "user2@yahoo.com") {
-          SharedPref.saveIsEmergencyUser(true);
-          Navigator.pushNamed(context, Routes.mainRoute);
-        } else {
-          SharedPref.saveIsEmergencyUser(false);
-          Navigator.pushNamed(context, Routes.mainRoute);
-        }
+        // Create a user object
+        Map<String, dynamic> userData = {
+          "uid": userCredential.user?.uid,
+          "email": userCredential.user?.email,
+          "displayName": userCredential.user?.displayName,
+          "photoURL": userCredential.user?.photoURL,
+        };
+
+        // Save user object to SharedPreferences
+        await SharedPref.saveUserObj(userData);
+
+        // Check if the user is an emergency user
+        bool isEmergencyUser = userCredential.user?.email == "user2@yahoo.com";
+        await SharedPref.saveIsEmergencyUser(isEmergencyUser);
+
+        // Navigate to the main screen
+        Navigator.pushNamed(context, Routes.mainRoute);
+        SharedPref.saveIsUserLogin(true);
         print('Login successful: ${userCredential.user?.email}');
       }
     } on FirebaseAuthException catch (e) {
-      // Handle errors
       setState(() {
         errorMessage = e.message ?? 'An error occurred';
       });

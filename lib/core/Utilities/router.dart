@@ -10,7 +10,7 @@ import 'package:safe_space_app/features/view/sound/soundView.dart';
 
 class Routes {
   static const String splashRoute = "/splash";
-  static const String onBoardingRoute = "/";
+  static const String onBoardingRoute = "/onBoarding";
   static const String loginRoute = "/login";
   static const String registerRout = "/register";
   static const String homeRoute = "/home";
