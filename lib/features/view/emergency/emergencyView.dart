@@ -13,7 +13,6 @@ class EmergencyView extends StatelessWidget {
     String url({required String longitude, latitude}) =>
         //       //  طول//
         "https://www.google.com/maps/place/$latitude,$longitude";
-
     Future<void> _launchURL() async {
       Uri uri = Uri.parse(url(longitude: "31.32288", latitude: "30.31141"));
       if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {

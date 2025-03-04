@@ -5,6 +5,7 @@ import 'package:safe_space_app/features/view/emergencyUser/emergencyUser.dart';
 import 'package:safe_space_app/features/view/home/homeView.dart';
 import 'package:safe_space_app/features/view/login/loginView.dart';
 import 'package:safe_space_app/features/view/main/mainView.dart';
+import 'package:safe_space_app/features/view/monitor/monitorHeartView.dart';
 import 'package:safe_space_app/features/view/onboarding/onboardingView.dart';
 import 'package:safe_space_app/features/view/sound/soundView.dart';
 
@@ -19,6 +20,7 @@ class Routes {
   static const String soundRoute = "/sound";
   static const String chatRoute = "/chat";
   static const String emergencyUserRoute = "/emergencyUser";
+  static const String monitorHeartView = "/MonitorHeartView";
 }
 
 class RouteGenerator {
@@ -44,7 +46,9 @@ class RouteGenerator {
       case Routes.chatRoute:
         return MaterialPageRoute(builder: (_) => Chatview());
       case Routes.emergencyUserRoute:
-        return MaterialPageRoute(builder: (_) => EmergencyUser());
+        return MaterialPageRoute(builder: (_) => EmergencyUser()); 
+        case Routes.monitorHeartView:
+        return MaterialPageRoute(builder: (_) => HeartRateViewBuilder(heartRate: arguments as int,));
       default:
         return unDefinedRoute();
     }

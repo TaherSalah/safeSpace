@@ -1,12 +1,48 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:safe_space_app/core/Utilities/router.dart';
 import 'package:safe_space_app/core/Widgets/default_text_widget.dart';
 import 'package:safe_space_app/features/view/monitor/monitorHeartView.dart';
+import 'package:safe_space_app/features/viewModel/home_controllar.dart';
 
-class HomeViewItemBuilder extends StatelessWidget {
+class HomeViewItemBuilder extends StatefulWidget {
   const HomeViewItemBuilder({super.key});
 
+  @override
+  _HomeViewItemBuilderState createState() => _HomeViewItemBuilderState();
+}
+
+class _HomeViewItemBuilderState extends StateMVC<HomeViewItemBuilder> {
+
+  /// Let the 'business logic' run in a Controller
+  _HomeViewItemBuilderState() : super(HomeController()) {
+    /// Acquire a reference to the passed Controller.
+    con = controller as HomeController;
+  }
+  late HomeController con;
+
+
+  @override
+  void initState() {
+    con.fetchData;
+
+    super.initState();
+    // Ensure appState is initialized before using it
+    if (rootState != null) {
+      appState = rootState!;
+      var con = appState.controller;
+
+      // Retrieve the correct controller by type or ID
+      con = appState.controllerByType<HomeController>();
+      con = appState.controllerById(con?.keyId);
+    } else {
+      // Handle the case where rootState is not initialized
+      print('rootState is null');
+    }
+  }
+
+  late AppStateMVC appState;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -37,10 +73,7 @@ class HomeViewItemBuilder extends StatelessWidget {
           ),
           CardItemBuilderWidget(
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => MonitorHeartView()));
+               Navigator.pushNamed(context, Routes.monitorHeartView,arguments: con.BPM);
               },
               title: "Monitor heartbeat rate",
               iconPath: "assets/images/Vector.png"),
