@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:safe_space_app/core/Utilities/k_color.dart';
-import 'package:safe_space_app/core/Utilities/toast_helper.dart';
-import 'package:safe_space_app/core/Widgets/default_text_widget.dart';
-import 'package:safe_space_app/features/view/home/widget/homeViewItemBuilder.dart';
+import 'package:safeSpace/core/Utilities/k_color.dart';
+import 'package:safeSpace/core/Utilities/toast_helper.dart';
+import 'package:safeSpace/core/Widgets/default_text_widget.dart';
+import 'package:safeSpace/features/view/home/widget/homeViewItemBuilder.dart';
 
 class ContactView extends StatelessWidget {
   const ContactView({super.key});

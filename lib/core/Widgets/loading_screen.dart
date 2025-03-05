@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:safe_space_app/core/Utilities/k_color.dart';
+import 'package:safeSpace/core/Utilities/k_color.dart';
 
 class LoadingScreen extends StatelessWidget {
   final Widget child;

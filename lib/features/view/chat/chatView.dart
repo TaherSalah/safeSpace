@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
-import 'package:safe_space_app/core/Utilities/k_color.dart';
-import 'package:safe_space_app/features/viewModel/chat_controllar.dart';
+import 'package:safeSpace/core/Utilities/k_color.dart';
+import 'package:safeSpace/features/viewModel/chat_controllar.dart';
 
 class Chatview extends StatefulWidget {
   const Chatview({super.key});

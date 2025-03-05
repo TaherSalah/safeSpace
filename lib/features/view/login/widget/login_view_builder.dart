@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
-import 'package:safe_space_app/core/Utilities/k_color.dart';
-import 'package:safe_space_app/core/Widgets/custom_button_widget.dart';
-import 'package:safe_space_app/core/Widgets/custom_textfeild_widget.dart';
-import 'package:safe_space_app/core/Widgets/default_text_widget.dart';
-import 'package:safe_space_app/features/viewModel/login_controllar.dart';
+import 'package:safeSpace/core/Utilities/k_color.dart';
+import 'package:safeSpace/core/Widgets/custom_button_widget.dart';
+import 'package:safeSpace/core/Widgets/custom_textfeild_widget.dart';
+import 'package:safeSpace/core/Widgets/default_text_widget.dart';
+import 'package:safeSpace/features/viewModel/login_controllar.dart';
 
 class LoginViewBuilder extends StatefulWidget {
   const LoginViewBuilder({super.key});

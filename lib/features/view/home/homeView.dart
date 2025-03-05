@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:safe_space_app/features/view/home/widget/homeViewItemBuilder.dart';
+import 'package:safeSpace/features/view/home/widget/homeViewItemBuilder.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});

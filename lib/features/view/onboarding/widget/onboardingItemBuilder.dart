@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:safe_space_app/core/Shared/shared_preferances.dart';
-import 'package:safe_space_app/core/Utilities/k_color.dart';
-import 'package:safe_space_app/core/Utilities/router.dart';
-import 'package:safe_space_app/core/Widgets/default_text_widget.dart';
+import 'package:safeSpace/core/Shared/shared_preferances.dart';
+import 'package:safeSpace/core/Utilities/k_color.dart';
+import 'package:safeSpace/core/Utilities/router.dart';
+import 'package:safeSpace/core/Widgets/default_text_widget.dart';
 
 import '../../../../core/Widgets/custom_button_widget.dart';
 

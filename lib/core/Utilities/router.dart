@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:safe_space_app/features/view/chat/chatView.dart';
-import 'package:safe_space_app/features/view/emergency/emergencyView.dart';
-import 'package:safe_space_app/features/view/emergencyUser/emergencyUser.dart';
-import 'package:safe_space_app/features/view/home/homeView.dart';
-import 'package:safe_space_app/features/view/login/loginView.dart';
-import 'package:safe_space_app/features/view/main/mainView.dart';
-import 'package:safe_space_app/features/view/monitor/monitorHeartView.dart';
-import 'package:safe_space_app/features/view/onboarding/onboardingView.dart';
-import 'package:safe_space_app/features/view/sound/soundView.dart';
+import 'package:safeSpace/features/view/chat/chatView.dart';
+import 'package:safeSpace/features/view/emergency/emergencyView.dart';
+import 'package:safeSpace/features/view/emergencyUser/emergencyUser.dart';
+import 'package:safeSpace/features/view/home/homeView.dart';
+import 'package:safeSpace/features/view/login/loginView.dart';
+import 'package:safeSpace/features/view/main/mainView.dart';
+import 'package:safeSpace/features/view/monitor/monitorHeartView.dart';
+import 'package:safeSpace/features/view/onboarding/onboardingView.dart';
+import 'package:safeSpace/features/view/sound/soundView.dart';
 
 class Routes {
   static const String splashRoute = "/splash";

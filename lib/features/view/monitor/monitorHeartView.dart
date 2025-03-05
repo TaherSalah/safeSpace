@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:safe_space_app/core/Widgets/default_text_widget.dart';
-import 'package:safe_space_app/features/view/home/widget/homeViewItemBuilder.dart';
+import 'package:safeSpace/core/Widgets/default_text_widget.dart';
+import 'package:safeSpace/features/view/home/widget/homeViewItemBuilder.dart';
 
 class HeartRateViewBuilder extends StatefulWidget {
   const HeartRateViewBuilder({super.key, required this.heartRate});

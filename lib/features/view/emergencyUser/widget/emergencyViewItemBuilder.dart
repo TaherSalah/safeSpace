@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:safe_space_app/core/Utilities/router.dart';
-import 'package:safe_space_app/core/Widgets/default_text_widget.dart';
+import 'package:safeSpace/core/Utilities/router.dart';
+import 'package:safeSpace/core/Widgets/default_text_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class EmergencyViewItemBuilder extends StatefulWidget {

@@ -1,8 +1,8 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:safe_space_app/features/view/contactUser/emergencyView.dart';
-import 'package:safe_space_app/features/view/home/widget/homeViewItemBuilder.dart';
+import 'package:safeSpace/features/view/contactUser/emergencyView.dart';
+import 'package:safeSpace/features/view/home/widget/homeViewItemBuilder.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class EmergencyView extends StatelessWidget {

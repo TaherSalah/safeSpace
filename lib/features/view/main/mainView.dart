@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
-import 'package:safe_space_app/features/viewModel/main_coontrollar.dart';
+import 'package:safeSpace/features/viewModel/main_coontrollar.dart';
 
 import '../../../core/Shared/shared_preferances.dart';
 

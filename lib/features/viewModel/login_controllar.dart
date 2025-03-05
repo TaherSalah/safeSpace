@@ -2,7 +2,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
-import 'package:safe_space_app/core/Shared/shared_preferances.dart';
+import 'package:safeSpace/core/Shared/shared_preferances.dart';
 
 import '../../core/Utilities/router.dart';
 

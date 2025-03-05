@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:safe_space_app/core/Shared/shared_preferances.dart';
-import 'package:safe_space_app/core/Utilities/router.dart';
-import 'package:safe_space_app/core/Widgets/default_text_widget.dart';
+import 'package:safeSpace/core/Shared/shared_preferances.dart';
+import 'package:safeSpace/core/Utilities/router.dart';
+import 'package:safeSpace/core/Widgets/default_text_widget.dart';
 
 class SettingsView extends StatelessWidget {
   const SettingsView({super.key});
