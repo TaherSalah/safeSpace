@@ -14,6 +14,7 @@ Future<void> main() async {
   await MyFirebaseMessagingService.requestPermission();
   FirebaseMessaging.onBackgroundMessage(MyFirebaseMessagingService.firebaseMessagingBackgroundHandler);
   await MyFirebaseMessagingService.subscribeToTopic("rate-update");
+
   SharedObj shared = SharedObj();
   shared.init();
   runApp(const MyApp());
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return MaterialApp(
             title: 'safe space',
-            initialRoute: Routes.mainRoute,
+            initialRoute: Routes.onBoardingRoute,
             debugShowCheckedModeBanner: false,
             onGenerateRoute: (settings) =>
                 RouteGenerator.getRoute(settings, context),

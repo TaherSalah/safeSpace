@@ -1,4 +1,5 @@
 // import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
@@ -30,12 +31,6 @@ class LoginController extends ControllerMVC {
   bool isVisible = false;
   int role = 2;
 
-  @override
-  void dispose() {
-    emailController.dispose();
-    passwordController.dispose();
-    super.dispose();
-  }
 
   Future<void> login(BuildContext context) async {
     try {
@@ -59,9 +54,8 @@ class LoginController extends ControllerMVC {
         // Check if the user is an emergency user
         bool isEmergencyUser = userCredential.user?.email == "user2@yahoo.com";
         await SharedPref.saveIsEmergencyUser(isEmergencyUser);
-
         // Navigate to the main screen
-        Navigator.pushNamed(context, Routes.mainRoute);
+        Navigator.pushReplacementNamed(context, Routes.mainRoute);
         SharedPref.saveIsUserLogin(true);
         print('Login successful: ${userCredential.user?.email}');
       }
@@ -79,4 +73,40 @@ class LoginController extends ControllerMVC {
       isVisible = !isVisible;
     });
   }
+  Future<void> sendMessage(String chatId, String text, String receiverId) async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) return;
+
+    final messageData = {
+      "senderId": user.uid,
+      "receiverId": receiverId,
+      "text": text,
+      "timestamp": FieldValue.serverTimestamp()
+    };
+
+    await FirebaseFirestore.instance
+        .collection("chats")
+        .doc(chatId)
+        .collection("messages")
+        .add(messageData);
+
+    // Update last message in chat document
+    await FirebaseFirestore.instance.collection("chats").doc(chatId).set({
+      "lastMessage": text,
+      "timestamp": FieldValue.serverTimestamp(),
+    }, SetOptions(merge: true));
+  }
+
+
+  // @override
+  // void dispose() {
+  //   emailController.dispose();
+  //   passwordController.dispose();
+  //   super.dispose();
+  // }
+
+
+
 }
+
+

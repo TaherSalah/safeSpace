@@ -3,18 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
-import 'package:safeSpace/core/Shared/shared_preferances.dart';
-
-import '../../core/Utilities/router.dart';
-
 class HomeController extends ControllerMVC {
-  // factory HomeController() {
-  //   _this ??= HomeController._();
-  //   return _this!;
-  // }
 
-  // static HomeController? _this;
-  // HomeController._();
   factory HomeController([StateMVC? state]) =>
       _this ??= HomeController._(state);
   HomeController._(super.state);
@@ -22,7 +12,7 @@ class HomeController extends ControllerMVC {
   static HomeController? _this;
 
   bool loading = false, rememberMe = false, acceptTerms = false;
-
+FirebaseAuth auth =FirebaseAuth.instance;
   final key = GlobalKey<FormState>();
   final DatabaseReference database = FirebaseDatabase.instance.ref();
   String date = "Loading...";

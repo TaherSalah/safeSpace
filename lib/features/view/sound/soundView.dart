@@ -23,10 +23,15 @@ class MusicPlayer extends StatefulWidget {
 class _MusicPlayerState extends State<MusicPlayer> {
   final AudioPlayer _audioPlayer = AudioPlayer();
   bool _isPlaying = false;
+  int currentSong=0;
+  List songs=[
+    "audio/atmosphere-sound-effect-239969.mp3",
+    "audio/rain-on-tent-22785.mp3",
+    "audio/white-noise-179828.mp3"
+    "audio/relaxing-ocean-waves-high-quality-recorded-177004.mp3"
+  ];
   String actorImageUrl =
       'assets/images/Illustration@2x.png'; // Replace with actual image URL
-  String audioUrl =
-      'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'; // Replace with actual audio URL
   Duration _currentPosition = Duration.zero;
   Duration _totalDuration = Duration(seconds: 1); // Prevent division by zero
   @override
@@ -39,7 +44,6 @@ class _MusicPlayerState extends State<MusicPlayer> {
         _totalDuration = duration;
       });
     });
-
     // Listening to the position change (current position of the audio)
     _audioPlayer.onPositionChanged.listen((position) {
       setState(() {
@@ -53,16 +57,44 @@ class _MusicPlayerState extends State<MusicPlayer> {
     _audioPlayer.dispose();
     super.dispose();
   }
+  Future<void> _togglePlayPause({bool isNext = false}) async {
+    String song = songs[currentSong];
 
-  void _togglePlayPause() {
-    if (_isPlaying) {
-      _audioPlayer.pause();
+    if (_isPlaying && !isNext) {
+      await _audioPlayer.pause();
     } else {
-      _audioPlayer.play(UrlSource(audioUrl));
+      await _audioPlayer.stop(); // Stop the previous song before playing the new one
+      await _audioPlayer.play(AssetSource(song)); // Play asset file
     }
 
     setState(() {
-      _isPlaying = !_isPlaying;
+      _isPlaying = !_isPlaying || isNext; // Ensures state updates correctly
+    });
+  }
+
+  void _nextSong() async {
+    await _audioPlayer.stop(); // Stop the current song before switching
+
+    setState(() {
+      currentSong = (currentSong + 1) % songs.length;
+    });
+
+    await _audioPlayer.play(AssetSource(songs[currentSong])); // Play next song
+    setState(() {
+      _isPlaying = true;
+    });
+  }
+
+  void _prevSong() async {
+    await _audioPlayer.stop(); // Stop the current song before switching
+
+    setState(() {
+      currentSong = (currentSong - 1 + songs.length) % songs.length;
+    });
+
+    await _audioPlayer.play(AssetSource(songs[currentSong])); // Play previous song
+    setState(() {
+      _isPlaying = true;
     });
   }
 
@@ -82,15 +114,6 @@ class _MusicPlayerState extends State<MusicPlayer> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(height: 30),
-          // Display actor image
-          // CachedNetworkImage(
-          //   imageUrl: actorImageUrl,
-          //   placeholder: (context, url) => CircularProgressIndicator(),
-          //   errorWidget: (context, url, error) => Icon(Icons.error),
-          //   height: 200,
-          //   width: 200,
-          //   fit: BoxFit.cover,
-          // ),
           Row(
             children: [
               IconButton(
@@ -119,16 +142,6 @@ class _MusicPlayerState extends State<MusicPlayer> {
             child: Image.asset(actorImageUrl),
           ),
           SizedBox(height: 60.h),
-          // Slider(
-          //   value: _currentPosition,
-          //   min: 0.0,
-          //   max: _totalDuration,
-          //   onChanged: (value) {
-          //     _seekTo(value);
-          //   },
-          // ),
-          // **Slider Positioned Outside the Control Box**
-
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -145,7 +158,10 @@ class _MusicPlayerState extends State<MusicPlayer> {
                   color: Color(0xffEF5DA8),
                 ),
                 onPressed: () {
-                  // You can add skip functionality here
+                  _prevSong();
+                  setState(() {
+
+                  });
                 },
               ),
               Center(
@@ -190,6 +206,9 @@ class _MusicPlayerState extends State<MusicPlayer> {
                   color: Color(0xffEF5DA8),
                 ),
                 onPressed: () {
+                  _nextSong();
+                  setState(() {
+                  });
                   // You can add skip functionality here
                 },
               ),
