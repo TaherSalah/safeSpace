@@ -24,8 +24,8 @@ class MainController extends ControllerMVC {
   void _initializeScreens() async {
     await getUserDetails(); // Fetch user details asynchronously
     screens =
-    // SharedPref.getIsEmergencyUser() == true
-    auth.currentUser?.email == "sos@gmail.com"
+    SharedPref.getIsEmergencyUser() == true
+
         ? [
       EmergencyUser(),
       EmergencyView(),
@@ -34,7 +34,6 @@ class MainController extends ControllerMVC {
         : [
       HomeView(),
       EmergencyView(),
-      // ChatScreen(chatId: '1',),
       SoundView(),
       SettingsView(),
     ];

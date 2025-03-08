@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:safeSpace/core/Shared/shared_preferances.dart';
+import 'package:safeSpace/core/Utilities/toast_helper.dart';
 
 import '../../core/Utilities/router.dart';
 
@@ -58,13 +59,20 @@ class LoginController extends ControllerMVC {
         Navigator.pushReplacementNamed(context, Routes.mainRoute);
         SharedPref.saveIsUserLogin(true);
         print('Login successful: ${userCredential.user?.email}');
+        ToastHelper.showSuccess(message: "Login successful");
+
       }
     } on FirebaseAuthException catch (e) {
+      ToastHelper.showError(message: e.message.toString());
       setState(() {
         errorMessage = e.message ?? 'An error occurred';
       });
       print('Error: ${e.message}');
     }
+  }
+  
+  Future<void> signOut(BuildContext context) async {
+   return await _auth.signOut();
   }
 
   // Update password visibility toggle

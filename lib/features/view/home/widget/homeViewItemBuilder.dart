@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:safeSpace/core/Utilities/router.dart';
 import 'package:safeSpace/core/Widgets/default_text_widget.dart';
+import 'package:safeSpace/features/view/contactUser/emergencyView.dart';
 import 'package:safeSpace/features/view/monitor/monitorHeartView.dart';
 import 'package:safeSpace/features/viewModel/home_controllar.dart';
 
@@ -58,7 +59,9 @@ class HomeViewItemBuilderState extends StateMVC<HomeViewItemBuilder> {
               title: "Monitor heartbeat rate",
               iconPath: "assets/images/Vector.png"),
           CardItemBuilderWidget(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ContactView(),));
+              },
               title: "Breathing techniques",
               iconPath: "assets/images/Meditation.png"),
           CardItemBuilderWidget(

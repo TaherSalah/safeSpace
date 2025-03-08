@@ -3,9 +3,11 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:safeSpace/core/Shared/shared_obj.dart';
 import 'package:safeSpace/core/Utilities/fcm_handler.dart';
 import 'package:safeSpace/core/Utilities/router.dart';
+import 'package:safeSpace/features/viewModel/home_controllar.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,6 +16,16 @@ Future<void> main() async {
   await MyFirebaseMessagingService.requestPermission();
   FirebaseMessaging.onBackgroundMessage(MyFirebaseMessagingService.firebaseMessagingBackgroundHandler);
   await MyFirebaseMessagingService.subscribeToTopic("rate-update");
+  void setupFirebaseMessaging() {
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      print("Message received: ${message.notification?.title}");
+      // Show local notification here
+    });
+
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      print("Notification clicked!");
+    });
+  }
 
   SharedObj shared = SharedObj();
   shared.init();
@@ -21,9 +33,20 @@ Future<void> main() async {
 }
 
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
+  @override
+  MyAppState createState() => MyAppState();
+}
+class MyAppState extends StateMVC<MyApp> {
+  late HomeController con;
+
+  MyAppState() : super(HomeController()) {
+    con = controller as HomeController;
+    ();
+    con.fetchData();
+  }
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -33,7 +56,9 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return MaterialApp(
             title: 'safe space',
-            initialRoute: Routes.onBoardingRoute,
+            initialRoute:    con. auth.currentUser?.email!= null
+
+              ? Routes.mainRoute:Routes.onBoardingRoute,
             debugShowCheckedModeBanner: false,
             onGenerateRoute: (settings) =>
                 RouteGenerator.getRoute(settings, context),
