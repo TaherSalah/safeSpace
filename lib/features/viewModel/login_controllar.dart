@@ -1,6 +1,7 @@
 // import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:safeSpace/core/Shared/shared_preferances.dart';
@@ -9,13 +10,6 @@ import 'package:safeSpace/core/Utilities/toast_helper.dart';
 import '../../core/Utilities/router.dart';
 
 class LoginController extends ControllerMVC {
-  // factory LoginController() {
-  //   _this ??= LoginController._();
-  //   return _this!;
-  // }
-
-  // static LoginController? _this;
-  // LoginController._();
   factory LoginController([StateMVC? state]) =>
       _this ??= LoginController._(state);
   LoginController._(super.state);
@@ -31,7 +25,6 @@ class LoginController extends ControllerMVC {
   String? errorMessage;
   bool isVisible = false;
   int role = 2;
-
 
   Future<void> login(BuildContext context) async {
     try {
@@ -51,16 +44,15 @@ class LoginController extends ControllerMVC {
 
         // Save user object to SharedPreferences
         await SharedPref.saveUserObj(userData);
-
         // Check if the user is an emergency user
         bool isEmergencyUser = userCredential.user?.email == "user2@yahoo.com";
         await SharedPref.saveIsEmergencyUser(isEmergencyUser);
         // Navigate to the main screen
         Navigator.pushReplacementNamed(context, Routes.mainRoute);
         SharedPref.saveIsUserLogin(true);
+        await saveUserToken();
         print('Login successful: ${userCredential.user?.email}');
         ToastHelper.showSuccess(message: "Login successful");
-
       }
     } on FirebaseAuthException catch (e) {
       ToastHelper.showError(message: e.message.toString());
@@ -70,9 +62,9 @@ class LoginController extends ControllerMVC {
       print('Error: ${e.message}');
     }
   }
-  
+
   Future<void> signOut(BuildContext context) async {
-   return await _auth.signOut();
+    return await _auth.signOut();
   }
 
   // Update password visibility toggle
@@ -81,7 +73,9 @@ class LoginController extends ControllerMVC {
       isVisible = !isVisible;
     });
   }
-  Future<void> sendMessage(String chatId, String text, String receiverId) async {
+
+  Future<void> sendMessage(
+      String chatId, String text, String receiverId) async {
     final user = FirebaseAuth.instance.currentUser;
     if (user == null) return;
 
@@ -105,16 +99,14 @@ class LoginController extends ControllerMVC {
     }, SetOptions(merge: true));
   }
 
-
-  // @override
-  // void dispose() {
-  //   emailController.dispose();
-  //   passwordController.dispose();
-  //   super.dispose();
-  // }
-
-
-
+  Future<void> saveUserToken() async {
+    String? token = await FirebaseMessaging.instance.getToken();
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null && token != null) {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(user.email)
+          .set({'token': token, 'userId': user.uid}, SetOptions(merge: true));
+    }
+  }
 }
-
-
