@@ -11,7 +11,8 @@ import 'package:safeSpace/core/Utilities/toast_helper.dart';
 import 'package:safeSpace/core/Widgets/default_text_widget.dart';
 import 'package:safeSpace/features/view/emergency/emergencyView.dart';
 import 'package:safeSpace/features/viewModel/home_controllar.dart';
-import 'package:safeSpace/main.dart';
+
+import '../../../core/Utilities/fcm_handler.dart';
 
 class ContactView extends StatefulWidget {
   const ContactView({super.key});

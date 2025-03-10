@@ -41,13 +41,9 @@ class LoginController extends ControllerMVC {
           "displayName": userCredential.user?.displayName,
           "photoURL": userCredential.user?.photoURL,
         };
-
-        // Save user object to SharedPreferences
         await SharedPref.saveUserObj(userData);
-        // Check if the user is an emergency user
         bool isEmergencyUser = userCredential.user?.email == "user2@yahoo.com";
         await SharedPref.saveIsEmergencyUser(isEmergencyUser);
-        // Navigate to the main screen
         Navigator.pushReplacementNamed(context, Routes.mainRoute);
         SharedPref.saveIsUserLogin(true);
         await saveUserToken();
