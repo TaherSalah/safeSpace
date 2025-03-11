@@ -7,6 +7,9 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:googleapis_auth/auth_io.dart' as auth;
 import 'package:http/http.dart' as http;
 import 'package:safeSpace/core/Utilities/toast_helper.dart';
+import 'package:safeSpace/features/view/contactUser/emergencyView.dart';
+
+import '../../main.dart';
 
 class MyFirebaseMessagingService {
   static final FirebaseMessaging _messaging = FirebaseMessaging.instance;
@@ -52,6 +55,10 @@ class MyFirebaseMessagingService {
 
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
       debugPrint("User opened app via notification: ${message.data}");
+      debugPrint("User: ${message.data}");
+
+      Navigator.push(navigatorKey.currentState!.context, MaterialPageRoute(builder: (context) => ContactView(),));
+
     });
 
     FirebaseMessaging.instance
@@ -130,8 +137,8 @@ class NotificationsHelper {
   // handle notifications when received
   void handleMessages(RemoteMessage? message) {
     if (message != null) {
-      // navigatorKey.currentState?.pushNamed(NotificationsScreen.routeName, arguments: message);
-      ToastHelper.showSuccess(message: "on Background Message notification");
+      print("message in handle ${message.data}");
+      print("message in  ${message}");
     }
   }
 

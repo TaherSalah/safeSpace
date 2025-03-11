@@ -7,6 +7,7 @@ import 'package:safeSpace/core/Shared/shared_obj.dart';
 import 'package:safeSpace/core/Utilities/fcm_handler.dart';
 import 'package:safeSpace/core/Utilities/router.dart';
 import 'package:safeSpace/features/viewModel/home_controllar.dart';
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -55,6 +56,7 @@ class MyAppState extends StateMVC<MyApp> {
       splitScreenMode: true,
       builder: (context, child) {
         return MaterialApp(
+          navigatorKey: navigatorKey,
             title: 'safe space',
             initialRoute: con.auth.currentUser?.email != null
                 ? Routes.mainRoute

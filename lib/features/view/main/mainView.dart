@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
@@ -47,7 +48,7 @@ class _MainViewBuilderState extends StateMVC<MainView> {
         },
         currentIndex: con.currentIndex,
       ),
-      body: con.screens[con.currentIndex],
+      body: con.screens?[con.currentIndex],
     );
   }
 }
@@ -67,8 +68,9 @@ class BottomNavigationBarWidget extends StatefulWidget {
 class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
   @override
   Widget build(BuildContext context) {
+    User? user = FirebaseAuth.instance.currentUser;
     return BottomNavigationBar(
-      items: SharedPref.getIsEmergencyUser() == true
+      items: (user?.email == "sos@gmail.com" || SharedPref.getIsEmergencyUser() == true)
           ? <BottomNavigationBarItem>[
               _buildNavItem(
                   "assets/images/noun_Home_2976614.png", 0, 22.h, 22.w),

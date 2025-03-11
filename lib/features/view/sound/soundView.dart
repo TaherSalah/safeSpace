@@ -28,7 +28,6 @@ class _MusicPlayerState extends State<MusicPlayer> {
     "audio/atmosphere-sound-effect-239969.mp3",
     "audio/rain-on-tent-22785.mp3",
     "audio/white-noise-179828.mp3"
-    "audio/relaxing-ocean-waves-high-quality-recorded-177004.mp3"
   ];
   String actorImageUrl =
       'assets/images/Illustration@2x.png'; // Replace with actual image URL
@@ -37,7 +36,6 @@ class _MusicPlayerState extends State<MusicPlayer> {
   @override
   void initState() {
     super.initState();
-
     // Listening to the duration change (total length of the audio)
     _audioPlayer.onDurationChanged.listen((duration) {
       setState(() {
@@ -57,42 +55,77 @@ class _MusicPlayerState extends State<MusicPlayer> {
     _audioPlayer.dispose();
     super.dispose();
   }
-  Future<void> _togglePlayPause({bool isNext = false}) async {
-    String song = songs[currentSong];
-
-    if (_isPlaying && !isNext) {
+  // Future<void> _togglePlayPause({bool isNext = false}) async {
+  //   String song = songs[currentSong];
+  //
+  //   if (_isPlaying && !isNext) {
+  //     await _audioPlayer.pause();
+  //   } else {
+  //     await _audioPlayer.stop(); // Stop the previous song before playing the new one
+  //     await _audioPlayer.play(AssetSource(song)); // Play asset file
+  //   }
+  //
+  //   setState(() {
+  //     _isPlaying = !_isPlaying || isNext; // Ensures state updates correctly
+  //   });
+  // }
+  Future<void> _togglePlayPause() async {
+    if (_isPlaying) {
       await _audioPlayer.pause();
     } else {
-      await _audioPlayer.stop(); // Stop the previous song before playing the new one
-      await _audioPlayer.play(AssetSource(song)); // Play asset file
+      await _audioPlayer.play(AssetSource(songs[currentSong]));
     }
 
     setState(() {
-      _isPlaying = !_isPlaying || isNext; // Ensures state updates correctly
+      _isPlaying = !_isPlaying;
     });
   }
 
+  // void _nextSong() async {
+  //   await _audioPlayer.stop(); // Stop the current song before switching
+  //
+  //   setState(() {
+  //     currentSong = (currentSong + 1) % songs.length;
+  //   });
+  //
+  //   await _audioPlayer.play(AssetSource(songs[currentSong])); // Play next song
+  //   setState(() {
+  //     _isPlaying = true;
+  //   });
+  // }
   void _nextSong() async {
-    await _audioPlayer.stop(); // Stop the current song before switching
+    await _audioPlayer.stop(); // تأكد من إيقاف التشغيل الحالي
 
     setState(() {
       currentSong = (currentSong + 1) % songs.length;
     });
 
-    await _audioPlayer.play(AssetSource(songs[currentSong])); // Play next song
+    await _audioPlayer.play(AssetSource(songs[currentSong])); // تشغيل الأغنية الجديدة
     setState(() {
       _isPlaying = true;
     });
   }
 
+  // void _prevSong() async {
+  //   await _audioPlayer.stop(); // Stop the current song before switching
+  //
+  //   setState(() {
+  //     currentSong = (currentSong - 1 + songs.length) % songs.length;
+  //   });
+  //
+  //   await _audioPlayer.play(AssetSource(songs[currentSong])); // Play previous song
+  //   setState(() {
+  //     _isPlaying = true;
+  //   });
+  // }
   void _prevSong() async {
-    await _audioPlayer.stop(); // Stop the current song before switching
+    await _audioPlayer.stop(); // تأكد من إيقاف التشغيل الحالي
 
     setState(() {
       currentSong = (currentSong - 1 + songs.length) % songs.length;
     });
 
-    await _audioPlayer.play(AssetSource(songs[currentSong])); // Play previous song
+    await _audioPlayer.play(AssetSource(songs[currentSong])); // تشغيل الأغنية الجديدة
     setState(() {
       _isPlaying = true;
     });

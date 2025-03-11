@@ -58,12 +58,12 @@ class HomeViewItemBuilderState extends StateMVC<HomeViewItemBuilder> {
               },
               title: "Monitor heartbeat rate",
               iconPath: "assets/images/Vector.png"),
-          CardItemBuilderWidget(
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => ContactView(),));
-              },
-              title: "Breathing techniques",
-              iconPath: "assets/images/Meditation.png"),
+          // CardItemBuilderWidget(
+          //     onTap: () {
+          //       Navigator.push(context, MaterialPageRoute(builder: (context) => ContactView(),));
+          //     },
+          //     title: "Breathing techniques",
+          //     iconPath: "assets/images/Meditation.png"),
           CardItemBuilderWidget(
               title: "Ai assistsant",
               onTap: () {

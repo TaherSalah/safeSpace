@@ -106,7 +106,7 @@ class ChatController extends ControllerMVC {
 
 class GPTService {
   final OpenAI _openAI = OpenAI.instance.build(
-    token: "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", // استبدل بمفتاح API الخاص بك
+    token: "gpt key", // استبدل بمفتاح API الخاص بك
     baseOption: HttpSetup(receiveTimeout: Duration(seconds: 10)),
     enableLog: true,
   );

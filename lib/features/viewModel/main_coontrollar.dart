@@ -14,18 +14,20 @@ class MainController extends ControllerMVC {
   int currentIndex = 0;
   FirebaseAuth auth = FirebaseAuth.instance;
   String email = ""; // Initialize email as empty string initially
-  late List<Widget> screens;
+   List<Widget>? screens;
 
   MainController() {
     _initializeScreens(); // Initialize screens after the object is created
   }
 
-  // Method to initialize screens based on the user's email
+  // Method to initialize screens based o;n the user's email
   void _initializeScreens() async {
+
+    User? user = FirebaseAuth.instance.currentUser;
+    print(user?.email);
     await getUserDetails(); // Fetch user details asynchronously
     screens =
-    SharedPref.getIsEmergencyUser() == true
-
+        user?.email == "sos@gmail.com" ||  SharedPref.getIsEmergencyUser() == true
         ? [
       EmergencyUser(),
       EmergencyView(),
