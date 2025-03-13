@@ -122,12 +122,12 @@ class _LoginViewBuilderState extends StateMVC<LoginViewBuilder> {
               width: MediaQuery.sizeOf(context).width / 1.5,
               child: CustomButton(
                 verticalPadding: 12.h,
-                borderColor: KColors.KBtn,
+                borderColor: Color(0xffFBA2AB),
                 radius: 9.r,
                 title: "Login",
                 fontSize: 13.sp,
                 fontWeight: FontWeight.w700,
-                backgroundColor: KColors.KBtn,
+                backgroundColor: Color(0xffFBA2AB),
                 onTap: () async {
                   if (con.loginFormKey.currentState!.validate()) {
                     // You can add your login logic here

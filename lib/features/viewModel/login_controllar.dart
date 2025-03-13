@@ -24,7 +24,6 @@ class LoginController extends ControllerMVC {
   final loginFormKey = GlobalKey<FormState>();
   String? errorMessage;
   bool isVisible = false;
-  int role = 2;
 
   Future<void> login(BuildContext context) async {
     try {

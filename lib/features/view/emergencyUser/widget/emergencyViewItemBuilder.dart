@@ -31,10 +31,6 @@ class _EmergencyViewItemBuilderState extends State<EmergencyViewItemBuilder> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
-            height: 30,
-            child: Image.asset("assets/images/menu.png"),
-          ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 10.0),
             child: RichText(

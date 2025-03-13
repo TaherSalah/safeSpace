@@ -59,12 +59,12 @@ class OnboardingItemBuilder extends StatelessWidget {
           width: MediaQuery.sizeOf(context).width / 1.7,
           child: CustomButton(
             verticalPadding: 20,
-            borderColor: KColors.KBtn,
+            borderColor: Color(0xffFBA2AB),
             radius: 9.r,
             title: "Login",
             fontSize: 13.sp,
             fontWeight: FontWeight.w700,
-            backgroundColor: KColors.KBtn,
+            backgroundColor: Color(0xffFBA2AB),
             onTap: () async {
               Navigator.pushNamed(context, Routes.loginRoute);
               SharedPref.saveIsEmergencyUser(false);

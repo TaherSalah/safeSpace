@@ -3,8 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:safeSpace/core/Utilities/router.dart';
 import 'package:safeSpace/core/Widgets/default_text_widget.dart';
-import 'package:safeSpace/features/view/contactUser/emergencyView.dart';
-import 'package:safeSpace/features/view/monitor/monitorHeartView.dart';
 import 'package:safeSpace/features/viewModel/home_controllar.dart';
 
 class HomeViewItemBuilder extends StatefulWidget {
@@ -31,10 +29,6 @@ class HomeViewItemBuilderState extends StateMVC<HomeViewItemBuilder> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
-            height: 30,
-            child: Image.asset("assets/images/menu.png"),
-          ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 10.0),
             child: RichText(
@@ -53,11 +47,13 @@ class HomeViewItemBuilderState extends StateMVC<HomeViewItemBuilder> {
             ),
           ),
           CardItemBuilderWidget(
-              onTap: () {
-               Navigator.pushNamed(context, Routes.monitorHeartView,arguments: con.BPM);
-              },
-              title: "Monitor heartbeat rate",
-              iconPath: "assets/images/Vector.png"),
+            onTap: () {
+              Navigator.pushNamed(context, Routes.monitorHeartView,
+                  arguments: con.BPM);
+            },
+            title: "Monitor heartbeat rate",
+            iconPath: "assets/images/Vector.png",
+          ),
           // CardItemBuilderWidget(
           //     onTap: () {
           //       Navigator.push(context, MaterialPageRoute(builder: (context) => ContactView(),));
@@ -94,6 +90,7 @@ class CardItemBuilderWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(10.r),
               color: Color(0xffFCDDEC)),
           child: Row(
+            spacing: 50,
             children: [
               TextDefaultWidget(
                 title: title,
@@ -101,11 +98,12 @@ class CardItemBuilderWidget extends StatelessWidget {
                 fontSize: 20.sp,
               ),
               Spacer(),
-              Expanded(
-                child: SizedBox(
-                  height: 55,
-                  width: 60,
-                  child: Image.asset(iconPath),
+              SizedBox(
+                height: 55,
+                width: 60,
+                child: Image.asset(
+                  iconPath,
+                  // color: Color(0xffFBA2AB),
                 ),
               ),
             ],

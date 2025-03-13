@@ -70,20 +70,22 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
   Widget build(BuildContext context) {
     User? user = FirebaseAuth.instance.currentUser;
     return BottomNavigationBar(
-      items: (user?.email == "sos@gmail.com" || SharedPref.getIsEmergencyUser() == true)
+      items: (user?.email == "sos@gmail.com" ||
+              SharedPref.getIsEmergencyUser() == true)
           ? <BottomNavigationBarItem>[
               _buildNavItem(
-                  "assets/images/noun_Home_2976614.png", 0, 22.h, 22.w),
-              _buildNavItem("assets/images/Message circle.png", 1, 22.h, 22.w),
-              _buildNavItem("assets/images/settings.png", 3, 32.h, 32.w),
+                  "assets/images/noun_Home_2976614.png", 0, 22.h, 22.w, false),
+              _buildNavItem(
+                  "assets/images/Message circle.png", 1, 22.h, 22.w, false),
+              _buildNavItem("assets/images/settings.png", 3, 32.h, 32.w, false),
             ]
           : <BottomNavigationBarItem>[
               _buildNavItem(
-                  "assets/images/noun_Home_2976614.png", 0, 22.h, 22.w),
-              _buildNavItem("assets/images/Message circle.png", 1, 22.h, 22.w),
+                  "assets/images/noun_Home_2976614.png", 0, 22.h, 22.w, false),
               _buildNavItem(
-                  "assets/images/noun_users_847316 2.png", 2, 22.h, 22.w),
-              _buildNavItem("assets/images/settings.png", 3, 32.h, 32.w),
+                  "assets/images/Message circle.png", 1, 22.h, 22.w, false),
+              _buildNavItem("", 2, 30.h, 30.w, true),
+              _buildNavItem("assets/images/settings.png", 3, 32.h, 32.w, false),
             ],
       currentIndex: widget.currentIndex,
       selectedItemColor: Colors.black,
@@ -96,7 +98,7 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
   }
 
   BottomNavigationBarItem _buildNavItem(
-      String assetPath, int index, double height, double width) {
+      String assetPath, int index, double height, double width, bool? isIcon) {
     bool isSelected = widget.currentIndex == index;
     return BottomNavigationBarItem(
       backgroundColor: Theme.of(context).cardColor,
@@ -106,7 +108,11 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
           BlendMode.srcIn,
         ),
         child: SizedBox(
-            width: width, height: height, child: Image.asset(assetPath)),
+            width: width,
+            height: height,
+            child: isIcon == true
+                ? Icon(Icons.music_note, size: 35, color: Color(0xffCDD0E3))
+                : Image.asset(assetPath)),
       ),
       label: "",
     );
