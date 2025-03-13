@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 abstract class KColors {
-  static Color KPrimary = const Color(0xffaeaff7);
+  static Color KPrimary = const Color(0xFFDFC3B3);
   static Color KScondary = const Color(0xffF7F7F7);
   static Color KBtn2 = const Color(0xffFCDDEC);
   static Color KBtn = const Color(0xff371B34);

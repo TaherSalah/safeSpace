@@ -20,17 +20,10 @@ class OnboardingItemBuilder extends StatelessWidget {
           clipBehavior: Clip.none,
           children: [
             Center(
-              child: TextDefaultWidget(
-                  title: "SafeSpace",
-                  fontWeight: FontWeight.bold,
-                  FontFamily: "Bold",
-                  fontSize: 37,
-                  color: Colors.black),
+              child: SizedBox(),
             ),
             // This non-positioned child gives the Stack finite height.
-            SizedBox(
-              height: 400, // Adjust the height to fit your design needs.
-            ),
+            SizedBox(height: 400),
             Positioned(
               top: 150,
               left: -100,
@@ -40,6 +33,9 @@ class OnboardingItemBuilder extends StatelessWidget {
               ),
             ),
           ],
+        ),
+        Center(
+          child: Image.asset(height: 150.h, "assets/images/logoJp.jpg"),
         ),
         Spacer(),
         Padding(
