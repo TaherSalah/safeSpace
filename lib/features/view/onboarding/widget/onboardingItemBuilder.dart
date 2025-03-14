@@ -13,7 +13,6 @@ class OnboardingItemBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      spacing: 10,
       children: [
         SizedBox(height: 15),
         Stack(
@@ -23,10 +22,10 @@ class OnboardingItemBuilder extends StatelessWidget {
               child: SizedBox(),
             ),
             // This non-positioned child gives the Stack finite height.
-            SizedBox(height: 400),
+            SizedBox(height: 250),
             Positioned(
               top: 150,
-              left: -100,
+              left: -180,
               child: Image.asset(
                 "assets/images/BG Circle.png",
                 color: Color(0xffFCDDEC),
@@ -55,7 +54,7 @@ class OnboardingItemBuilder extends StatelessWidget {
           ),
         ),
         Container(
-          padding: EdgeInsets.only(bottom: 35),
+          padding: EdgeInsets.only(bottom: 15),
           width: MediaQuery.sizeOf(context).width / 1.7,
           child: CustomButton(
             verticalPadding: 20,

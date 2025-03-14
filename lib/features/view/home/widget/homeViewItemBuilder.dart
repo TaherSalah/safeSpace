@@ -95,15 +95,16 @@ class CardItemBuilderWidget extends StatelessWidget {
               TextDefaultWidget(
                 title: title,
                 color: Colors.black,
-                fontSize: 20.sp,
+                fontWeight: FontWeight.bold,
+                fontSize: 16.sp,
               ),
               Spacer(),
               SizedBox(
-                height: 55,
-                width: 60,
+                height: 49,
+                width: 50,
                 child: Image.asset(
                   iconPath,
-                  // color: Color(0xffFBA2AB),
+                  // color: Color(0xffFBA2AB),    change shape color
                 ),
               ),
             ],

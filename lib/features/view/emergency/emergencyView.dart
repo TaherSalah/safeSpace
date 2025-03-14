@@ -1,16 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
+import 'package:safeSpace/core/Utilities/fcm_handler.dart';
 import 'package:safeSpace/core/Widgets/custom_button_widget.dart';
 import 'package:safeSpace/core/Widgets/custom_textfeild_widget.dart';
 import 'package:safeSpace/features/view/home/widget/homeViewItemBuilder.dart';
 import 'package:safeSpace/features/viewModel/home_controllar.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../../viewModel/main_coontrollar.dart';
 
@@ -32,16 +31,6 @@ class EmergencyViewState extends StateMVC<EmergencyView> {
 
   @override
   Widget build(BuildContext context) {
-    String url({required String longitude, latitude}) =>
-        //       //  طول//
-        "https://www.google.com/maps/place/$latitude,$longitude";
-    Future<void> launchURL({dynamic latitude, longitude}) async {
-      Uri uri = Uri.parse(url(longitude: "$longitude", latitude: "$latitude"));
-      if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
-        throw "Could not launch $url";
-      }
-    }
-
     return Scaffold(
         body: SafeArea(
       child: Padding(
@@ -53,8 +42,10 @@ class EmergencyViewState extends StateMVC<EmergencyView> {
               onTap: () {
                 showMaterialModalBottomSheet(
                   context: context,
-                  builder: (context) => Container(
-                    height: MediaQuery.sizeOf(context).height / 2,
+                  builder: (context) => SizedBox(
+                    height: MediaQuery.sizeOf(context).width > 600
+                        ? MediaQuery.sizeOf(context).height / 2
+                        : MediaQuery.sizeOf(context).height / 1.5,
                     child: Form(
                       key: con.key,
                       child: Column(
@@ -76,6 +67,7 @@ class EmergencyViewState extends StateMVC<EmergencyView> {
                               },
                               backGroundColor: Theme.of(context).cardColor,
                               label: "Email",
+                              controller: con.emailController,
                               prefixIcon: Icon(
                                 FontAwesomeIcons.user,
                                 size: 14.sp,
@@ -99,11 +91,48 @@ class EmergencyViewState extends StateMVC<EmergencyView> {
                               fontSize: 13.sp,
                               fontWeight: FontWeight.w700,
                               backgroundColor: Color(0xffFBA2AB),
-                              onTap: () {
+                              onTap: () async {
                                 if (con.key.currentState!.validate()) {
-                                  // Perform the login action here
-                                  Navigator.pop(
-                                      context); // Close the dialog after success
+                                  FirebaseFirestore fire =
+                                      FirebaseFirestore.instance;
+                                  String targetEmail = con.emailController
+                                      .text; // Target user email
+                                  print("target email ${targetEmail}");
+                                  try {
+                                    // Fetch the user document based on email
+                                    DocumentSnapshot userDoc = await fire
+                                        .collection("users")
+                                        .doc(targetEmail)
+                                        .get();
+
+                                    if (userDoc.exists) {
+                                      Map<String, dynamic>? userData = userDoc
+                                          .data() as Map<String, dynamic>?;
+
+                                      if (userData != null &&
+                                          userData.containsKey("token") &&
+                                          userData.containsKey("userId")) {
+                                        String fcmToken = userData["token"];
+                                        String userId = userData["userId"];
+                                        // Send notification dynamically
+                                        NotificationsHelper().sendNotifications(
+                                          fcmToken:
+                                              fcmToken, // Dynamic FCM Token
+                                          title: "User Notification",
+                                          body: "User need to help Now",
+                                          userId: userId, // Dynamic User ID
+                                        );
+                                      } else {
+                                        print(
+                                            "Error: Required fields (token/userId) are missing in Firestore.");
+                                      }
+                                    } else {
+                                      print(
+                                          "Error: User document does not exist in Firestore.");
+                                    }
+                                  } catch (e) {
+                                    print("Error retrieving user data: $e");
+                                  }
                                 }
                               },
                             ),
@@ -124,22 +153,19 @@ class EmergencyViewState extends StateMVC<EmergencyView> {
             ),
             CardItemBuilderWidget(
                 onTap: () async {
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //       builder: (context) => ChatScreen(
-                  //           friendEmail: con.auth.currentUser?.email ?? ""),
-                  //     ));
-                  await con.sendEmail("tahersalah2016@gmail.com");
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ChatScreen(
+                            friendEmail: con.emailController.text ?? ""),
+                      ));
                 },
                 title: "Contact with Taher Salah",
                 iconPath: "assets/images/Message circle.png"),
             CardItemBuilderWidget(
                 onTap: () async {
-                  await launchURL(
+                  await con.launchURL(
                       latitude: con.latitude, longitude: con.longitude);
-                  print(con.latitude);
-                  print(con.longitude);
                 },
                 title: "Breathing techniques",
                 iconPath: "assets/images/location_on@2x.png"),
@@ -201,7 +227,7 @@ class _ChatScreenState extends State<ChatScreen> {
     // تحديد البريد الإلكتروني للصديق تلقائيًا
     String userEmail = _auth.currentUser?.email ?? "";
     if (userEmail == "user@gmail.com") {
-      widget.friendEmail = "sos@gmail.com";
+      widget.friendEmail = widget.friendEmail;
     } else {
       widget.friendEmail = "user@gmail.com";
     }
@@ -239,7 +265,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   .snapshots(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-                  return Center(child: Text("لا توجد رسائل بعد"));
+                  return Center(child: Text("No messages yet"));
                 }
 
                 return ListView.builder(
@@ -302,76 +328,4 @@ class _ChatScreenState extends State<ChatScreen> {
       ),
     );
   }
-}
-
-Future showCupertinoDialogs({required BuildContext context}) {
-  final _formKey = GlobalKey<FormState>();
-
-  return showCupertinoModalPopup(
-    context: context,
-    builder: (context) {
-      return Material(
-        child: Container(
-          // Set a maximum height based on screen size
-          height: MediaQuery.of(context).size.height *
-              0.4, // 40% of the screen height
-          width: MediaQuery.of(context).size.width *
-              0.8, // 80% of the screen width
-          child: SingleChildScrollView(
-            // Make the content scrollable on small screens
-            child: Form(
-              key: _formKey,
-              child: Column(
-                children: [
-                  CustomTextFieldWidget(
-                    validator: (val) {
-                      if (val!.trim().isEmpty) {
-                        return "Please enter your email";
-                      } else if (!val.contains('@')) {
-                        return "Please enter a valid email address";
-                      } else {
-                        return null;
-                      }
-                    },
-                    backGroundColor: Theme.of(context).cardColor,
-                    label: "Email",
-                    prefixIcon: Icon(
-                      FontAwesomeIcons.user,
-                      size: 14.sp,
-                    ),
-                    hint: "Enter your email",
-                    borderRadiusValue: 15,
-                    textInputType: TextInputType.emailAddress,
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                    padding: EdgeInsets.symmetric(vertical: 10),
-                    width: MediaQuery.of(context).size.width / 1.5,
-                    child: CustomButton(
-                      verticalPadding: 12.h,
-                      borderColor: Color(0xffFBA2AB),
-                      radius: 9.r,
-                      title: "Login",
-                      fontSize: 13.sp,
-                      fontWeight: FontWeight.w700,
-                      backgroundColor: Color(0xffFBA2AB),
-                      onTap: () {
-                        if (_formKey.currentState!.validate()) {
-                          // Perform the login action here
-                          Navigator.pop(
-                              context); // Close the dialog after success
-                        }
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      );
-    },
-  );
 }

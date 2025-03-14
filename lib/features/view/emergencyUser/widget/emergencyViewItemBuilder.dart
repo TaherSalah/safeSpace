@@ -57,7 +57,6 @@ class _EmergencyViewItemBuilderState extends State<EmergencyViewItemBuilder> {
           CardItemBuilderWidget(
               onTap: () async {
                 _launchURL;
-                print("object");
               },
               title: "Panic attack guidelines",
               iconPath: "assets/images/BookOpen.png"),

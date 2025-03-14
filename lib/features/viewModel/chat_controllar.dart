@@ -37,6 +37,13 @@ class ChatController extends ControllerMVC {
     );
   }
 
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _tts.stop();
+  }
+
   void startListening() async {
     if (!hasSpeechPermission) {
       print("Speech recognition permission denied!");
@@ -63,26 +70,40 @@ class ChatController extends ControllerMVC {
     setState(() {});
   }
 
+  // void sendMessage() async {
+  //   if (controller.text.isEmpty) return;
+  //   await _tts.stop();
+  //
+  //   String userMessage = controller.text;
+  //   setState(() {
+  //     messages.add({"role": "user", "content": userMessage});
+  //     controller.clear();
+  //     isLoading = true;
+  //     scrollToBottom();
+  //   });
+  //
+  //   String botResponse = await _gptService.getGPTResponse(userMessage);
+  //   setState(() {
+  //     messages.add({"role": "bot", "content": botResponse});
+  //     isLoading = false;
+  //     scrollToBottom();
+  //   });
+  //   _tts.setLanguage("en");
+  //   _tts.speak(botResponse);
+  // }
   void sendMessage() async {
     if (controller.text.isEmpty) return;
     await _tts.stop();
 
     String userMessage = controller.text;
-    setState(() {
-      messages.add({"role": "user", "content": userMessage});
-      controller.clear();
-      isLoading = true;
-      scrollToBottom();
-    });
+    controller.clear();
+    isLoading = true;
 
     String botResponse = await _gptService.getGPTResponse(userMessage);
-    setState(() {
-      messages.add({"role": "bot", "content": botResponse});
-      isLoading = false;
-      scrollToBottom();
-    });
-    _tts.setLanguage("en");
-    _tts.speak(botResponse);
+
+    isLoading = false;
+
+    _tts.speak(botResponse); // ✅ تشغيل الصوت فقط دون عرض النص
   }
 
   void scrollToBottom() {
@@ -98,7 +119,7 @@ class ChatController extends ControllerMVC {
   }
 
   void changeLanguage(String languageCode) {
-     languageCode = "en";
+    languageCode = "en";
     _tts.setLanguage(languageCode);
     print("Language changed to: $languageCode");
   }
@@ -106,7 +127,7 @@ class ChatController extends ControllerMVC {
 
 class GPTService {
   final OpenAI _openAI = OpenAI.instance.build(
-    token: "gpt key", // استبدل بمفتاح API الخاص بك
+    token: "add  a new token ",
     baseOption: HttpSetup(receiveTimeout: Duration(seconds: 10)),
     enableLog: true,
   );
@@ -115,15 +136,16 @@ class GPTService {
     final request = ChatCompleteText(
       model: GptTurboChatModel(),
       messages: [
-        {"role": "system", "content":"You are a heart health chatbot."},
+        {"role": "system", "content": "You are a heart health chat bot."},
         {"role": "user", "content": userInput},
       ],
-      maxToken: 3000,
+      maxToken: 200,
     );
 
     try {
       final response = await _openAI.onChatCompletion(request: request);
-      return response?.choices.first.message?.content ?? "Error processing request.";
+      return response?.choices.first.message?.content ??
+          "Error processing request.";
     } catch (e) {
       print("GPT API Error: $e");
       return "There was an issue processing your request.";

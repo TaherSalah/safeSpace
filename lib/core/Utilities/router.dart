@@ -44,11 +44,14 @@ class RouteGenerator {
       case Routes.soundRoute:
         return MaterialPageRoute(builder: (_) => const SoundView());
       case Routes.chatRoute:
-        return MaterialPageRoute(builder: (_) => Chatview());
+        return MaterialPageRoute(builder: (_) => ChatBotView());
       case Routes.emergencyUserRoute:
-        return MaterialPageRoute(builder: (_) => EmergencyUser()); 
-        case Routes.monitorHeartView:
-        return MaterialPageRoute(builder: (_) => HeartRateViewBuilder(heartRate: arguments as int,));
+        return MaterialPageRoute(builder: (_) => EmergencyUser());
+      case Routes.monitorHeartView:
+        return MaterialPageRoute(
+            builder: (_) => HeartRateViewBuilder(
+                  heartRate: arguments as int,
+                ));
       default:
         return unDefinedRoute();
     }

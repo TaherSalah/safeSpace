@@ -5,9 +5,8 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:safeSpace/core/Shared/shared_preferances.dart';
+import 'package:safeSpace/core/Utilities/router.dart';
 import 'package:safeSpace/core/Utilities/toast_helper.dart';
-
-import '../../core/Utilities/router.dart';
 
 class LoginController extends ControllerMVC {
   factory LoginController([StateMVC? state]) =>

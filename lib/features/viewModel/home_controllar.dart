@@ -1,16 +1,13 @@
 // import 'package:firebase_auth/firebase_auth.dart';
-import 'dart:convert';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:googleapis/gmail/v1.dart' as gmail;
-import 'package:googleapis_auth/auth_io.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:safeSpace/core/Shared/shared_preferances.dart';
 import 'package:safeSpace/core/Utilities/toast_helper.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomeController extends ControllerMVC {
   factory HomeController([StateMVC? state]) =>
@@ -34,6 +31,15 @@ class HomeController extends ControllerMVC {
   @override
   void dispose() {
     super.dispose();
+  }
+
+  String url({required String longitude, latitude}) =>
+      "https://www.google.com/maps/place/$latitude,$longitude";
+  Future<void> launchURL({dynamic latitude, longitude}) async {
+    Uri uri = Uri.parse(url(longitude: "$longitude", latitude: "$latitude"));
+    if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+      throw "Could not launch $url";
+    }
   }
 
   void fetchData() {
@@ -127,23 +133,5 @@ class HomeController extends ControllerMVC {
           .doc(user.email)
           .set({'token': token, 'userId': user.uid}, SetOptions(merge: true));
     }
-  }
-
-  Future<void> sendEmail(String recipientEmail) async {
-    final clientId = ClientId("110196620480251439225", "");
-    final client = await clientViaUserConsent(
-        clientId, [gmail.GmailApi.mailGoogleComScope], (url) {
-      print("Open this URL in your browser: $url");
-    });
-
-    final gmailApi = gmail.GmailApi(client);
-    final message = gmail.Message()
-      ..raw = base64Encode(utf8.encode("To: $recipientEmail\r\n"
-          "Subject: Test Email\r\n"
-          "\r\n"
-          "This is an automated email from Flutter using OAuth2."));
-
-    await gmailApi.users.messages.send(message, "me");
-    print("✅ Email sent to $recipientEmail using OAuth2!");
   }
 }
