@@ -42,12 +42,6 @@ class HomeController extends ControllerMVC {
     }
   }
 
-  String? emailSaved;
-  void fetchEmail() async {
-    emailSaved = await SharedPref.getEmailContact();
-    print("User Email: $emailSaved");
-  }
-
   void fetchData() {
     database.child("date").onValue.listen((event) {
       setState(() {

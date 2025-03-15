@@ -30,7 +30,6 @@ class EmergencyViewState extends StateMVC<EmergencyView> {
     con = controller as HomeController;
     ();
     con.fetchData();
-    con.fetchEmail();
   }
   @override
   void initState() {
