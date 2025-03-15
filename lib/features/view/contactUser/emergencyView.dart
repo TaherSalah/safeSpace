@@ -85,6 +85,7 @@ class ContactViewState extends StateMVC<ContactView> {
     }
 
     return Scaffold(
+        backgroundColor: Color(0xffF7E8DA),
         appBar: AppBar(
           title: TextDefaultWidget(title: "Contact"),
         ),

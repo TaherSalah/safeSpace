@@ -54,12 +54,6 @@ class HomeViewItemBuilderState extends StateMVC<HomeViewItemBuilder> {
             title: "Monitor heartbeat rate",
             iconPath: "assets/images/Vector.png",
           ),
-          // CardItemBuilderWidget(
-          //     onTap: () {
-          //       Navigator.push(context, MaterialPageRoute(builder: (context) => ContactView(),));
-          //     },
-          //     title: "Breathing techniques",
-          //     iconPath: "assets/images/Meditation.png"),
           CardItemBuilderWidget(
               title: "Ai assistsant",
               onTap: () {
@@ -88,7 +82,7 @@ class CardItemBuilderWidget extends StatelessWidget {
           padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 10.w),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.r),
-              color: Color(0xffFCDDEC)),
+              color: Color(0xffEF5DA8)),
           child: Row(
             spacing: 50,
             children: [
@@ -104,7 +98,7 @@ class CardItemBuilderWidget extends StatelessWidget {
                 width: 50,
                 child: Image.asset(
                   iconPath,
-                  // color: Color(0xffFBA2AB),    change shape color
+                  color: Color(0xffFFD0Df), //  change shape color
                 ),
               ),
             ],

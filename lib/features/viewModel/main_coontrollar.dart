@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
+import 'package:safeSpace/features/view/emergency/SosEmergencyView.dart';
 import 'package:safeSpace/features/view/emergency/emergencyView.dart';
 import 'package:safeSpace/features/view/emergencyUser/emergencyUser.dart';
 import 'package:safeSpace/features/view/home/homeView.dart';
@@ -14,7 +15,7 @@ class MainController extends ControllerMVC {
   int currentIndex = 0;
   FirebaseAuth auth = FirebaseAuth.instance;
   String email = ""; // Initialize email as empty string initially
-   List<Widget>? screens;
+  List<Widget>? screens;
 
   MainController() {
     _initializeScreens(); // Initialize screens after the object is created
@@ -22,23 +23,22 @@ class MainController extends ControllerMVC {
 
   // Method to initialize screens based o;n the user's email
   void _initializeScreens() async {
-
     User? user = FirebaseAuth.instance.currentUser;
     print(user?.email);
     await getUserDetails(); // Fetch user details asynchronously
-    screens =
-        user?.email == "sos@gmail.com" ||  SharedPref.getIsEmergencyUser() == true
+    screens = user?.email == "user@gmail.com" ||
+            SharedPref.getIsEmergencyUser() == false
         ? [
-      EmergencyUser(),
-      EmergencyView(),
-      SettingsView(),
-    ]
+            HomeView(),
+            EmergencyView(),
+            SoundView(),
+            SettingsView(),
+          ]
         : [
-      HomeView(),
-      EmergencyView(),
-      SoundView(),
-      SettingsView(),
-    ];
+            EmergencyUser(),
+            SosEmergencyView(),
+            SettingsView(),
+          ];
     setState(() {}); // Trigger the UI to rebuild after initialization
   }
 
@@ -93,5 +93,3 @@ class ChatMessage {
     );
   }
 }
-
-

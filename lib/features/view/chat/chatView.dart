@@ -22,6 +22,7 @@ class ChatBotViewState extends StateMVC<ChatBotView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xffF7E8DA),
       appBar: AppBar(
         title: const Text("GPT Chat Bot"),
         leading: BackButton(

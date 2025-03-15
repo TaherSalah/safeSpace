@@ -57,7 +57,7 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^5.0.0
-
+  flutter_launcher_icons: ^0.13.1
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
@@ -82,3 +82,21 @@ flutter:
     - family: RegularAr
       fonts:
         - asset: assets/fonts/Alegreya-Regular.ttf
+flutter_launcher_icons:
+  image_path: "assets/images/logoJp.jpg"
+  image_path_android: "assets/images/logoJp.jpg"
+  image_path_ios: "assets/images/logoJp.jpg"
+  remove_alpha_ios: true
+  background_color_ios: "#99D9EA"
+
+  android: "launcher_icon"
+  min_sdk_android: 21
+  adaptive_icon_background: "#99D9EA"
+  adaptive_icon_foreground: "assets/images/logoJp.jpg"
+
+  ios: true
+  remove_alpha_channel_ios: true
+
+#dart run flutter_launcher_icons
+#flutter build apk --debug
+#flutter build appbundle --release

@@ -13,17 +13,14 @@ class ChatController extends ControllerMVC {
   }
 
   ChatController._(super.state);
-
   final GPTService _gptService = GPTService();
   final TextEditingController controller = TextEditingController();
   final ScrollController scrollController = ScrollController();
   final List<Map<String, String>> messages = [];
   bool isLoading = false;
-
   final stt.SpeechToText _speech = stt.SpeechToText();
   bool isListening = false;
   bool hasSpeechPermission = false;
-
   final FlutterTts _tts = FlutterTts();
 
   Future<void> initServices() async {
@@ -52,7 +49,7 @@ class ChatController extends ControllerMVC {
 
     isListening = true;
     _speech.listen(
-      localeId: "en", // دعم اللغات المختلفة
+      localeId: "en",
       onResult: (result) {
         controller.text = result.recognizedWords;
         if (result.finalResult) {
@@ -70,27 +67,6 @@ class ChatController extends ControllerMVC {
     setState(() {});
   }
 
-  // void sendMessage() async {
-  //   if (controller.text.isEmpty) return;
-  //   await _tts.stop();
-  //
-  //   String userMessage = controller.text;
-  //   setState(() {
-  //     messages.add({"role": "user", "content": userMessage});
-  //     controller.clear();
-  //     isLoading = true;
-  //     scrollToBottom();
-  //   });
-  //
-  //   String botResponse = await _gptService.getGPTResponse(userMessage);
-  //   setState(() {
-  //     messages.add({"role": "bot", "content": botResponse});
-  //     isLoading = false;
-  //     scrollToBottom();
-  //   });
-  //   _tts.setLanguage("en");
-  //   _tts.speak(botResponse);
-  // }
   void sendMessage() async {
     if (controller.text.isEmpty) return;
     await _tts.stop();
@@ -103,7 +79,7 @@ class ChatController extends ControllerMVC {
 
     isLoading = false;
 
-    _tts.speak(botResponse); // ✅ تشغيل الصوت فقط دون عرض النص
+    _tts.speak(botResponse);
   }
 
   void scrollToBottom() {

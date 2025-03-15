@@ -6,6 +6,7 @@ class SharedPref {
   static const String _userObj = "userObj";
   static const String _isEmergencyUser = "isEmergencyUser";
   static const String _isUserLogin = "isUserLogin";
+  static const String contactEmail = "contactEmail";
 
   /// Save User Object
   static Future<void> saveUserObj(Map<String, dynamic> user) async {
@@ -28,6 +29,16 @@ class SharedPref {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove(_userObj);
     await prefs.remove(_isEmergencyUser);
+  }
+
+  static Future<void> saveEmailContact(String email) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(contactEmail, email);
+  }
+
+  static Future<String> getEmailContact() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString(contactEmail) ?? "";
   }
 
   /// Save Emergency User Flag

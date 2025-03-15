@@ -42,13 +42,29 @@ class _MainViewBuilderState extends StateMVC<MainView> {
   Widget build(BuildContext context) {
     con.getUserDetails();
     return Scaffold(
+      backgroundColor: Color(0xffF7E8DA),
       bottomNavigationBar: BottomNavigationBarWidget(
         onTap: (index) {
           con.changeScreens(index: index);
         },
         currentIndex: con.currentIndex,
       ),
-      body: con.screens?[con.currentIndex],
+      body: SafeArea(
+        child: Column(
+          children: [
+            SizedBox(
+              height: 10,
+            ),
+            SizedBox(width: 70, child: Image.asset("assets/images/logoJp.jpg")),
+            Expanded(
+              // ✅ This prevents overflow
+              child: con.screens != null
+                  ? con.screens![con.currentIndex]
+                  : SizedBox(),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -70,13 +86,15 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
   Widget build(BuildContext context) {
     User? user = FirebaseAuth.instance.currentUser;
     return BottomNavigationBar(
-      items: (user?.email == "sos@gmail.com" ||
-              SharedPref.getIsEmergencyUser() == true)
+      items: (user?.email == "user@gmail.com" ||
+              SharedPref.getIsEmergencyUser() == false)
           ? <BottomNavigationBarItem>[
               _buildNavItem(
                   "assets/images/noun_Home_2976614.png", 0, 22.h, 22.w, false),
               _buildNavItem(
                   "assets/images/Message circle.png", 1, 22.h, 22.w, false),
+              _buildNavItem("assets/images/image-removebg-preview (1).png", 2,
+                  30.h, 30.w, false),
               _buildNavItem("assets/images/settings.png", 3, 32.h, 32.w, false),
             ]
           : <BottomNavigationBarItem>[
@@ -84,7 +102,6 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
                   "assets/images/noun_Home_2976614.png", 0, 22.h, 22.w, false),
               _buildNavItem(
                   "assets/images/Message circle.png", 1, 22.h, 22.w, false),
-              _buildNavItem("", 2, 30.h, 30.w, true),
               _buildNavItem("assets/images/settings.png", 3, 32.h, 32.w, false),
             ],
       currentIndex: widget.currentIndex,

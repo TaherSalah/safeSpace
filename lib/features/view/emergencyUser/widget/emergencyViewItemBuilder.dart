@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:safeSpace/core/Utilities/router.dart';
 import 'package:safeSpace/core/Widgets/default_text_widget.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class EmergencyViewItemBuilder extends StatefulWidget {
   const EmergencyViewItemBuilder({super.key});
@@ -13,17 +12,6 @@ class EmergencyViewItemBuilder extends StatefulWidget {
 }
 
 class _EmergencyViewItemBuilderState extends State<EmergencyViewItemBuilder> {
-  String url({required String longitude, latitude}) =>
-      //       //  طول//
-      "https://www.google.com/maps/place/$latitude,$longitude";
-
-  Future<void> _launchURL() async {
-    Uri uri = Uri.parse(url(longitude: "31.32288", latitude: "30.31141"));
-    if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
-      throw "Could not launch $url";
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -49,15 +37,13 @@ class _EmergencyViewItemBuilderState extends State<EmergencyViewItemBuilder> {
             ),
           ),
           CardItemBuilderWidget(
-              title: "Ai assistsant",
+              title: "Ai assistant",
               onTap: () {
                 Navigator.pushNamed(context, Routes.chatRoute);
               },
               iconPath: "assets/images/Meetup Icon.png"),
           CardItemBuilderWidget(
-              onTap: () async {
-                _launchURL;
-              },
+              onTap: () async {},
               title: "Panic attack guidelines",
               iconPath: "assets/images/BookOpen.png"),
         ],
@@ -82,7 +68,7 @@ class CardItemBuilderWidget extends StatelessWidget {
           padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 10.w),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.r),
-              color: Color(0xffFCDDEC)),
+              color: Color(0xffEF5DA8)),
           child: Row(
             children: [
               Expanded(
@@ -99,7 +85,10 @@ class CardItemBuilderWidget extends StatelessWidget {
                 child: SizedBox(
                   height: 55,
                   width: 60,
-                  child: Image.asset(iconPath),
+                  child: Image.asset(
+                    iconPath,
+                    color: Color(0xffFFD0Df),
+                  ),
                 ),
               ),
             ],
