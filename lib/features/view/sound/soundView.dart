@@ -28,7 +28,7 @@ class _MusicPlayerState extends State<MusicPlayer> {
   List songs = [
     "audio/atmosphere-sound-effect-239969.mp3",
     "audio/rain-on-tent-22785.mp3",
-    "audio/white-noise-179828.mp3"
+    "audio/white-noise-179828.mp3",
   ];
   String actorImageUrl =
       'assets/images/image-removebg-preview.png'; // Replace with actual image URL
@@ -70,35 +70,29 @@ class _MusicPlayerState extends State<MusicPlayer> {
   }
 
   void _nextSong() async {
-    await _audioPlayer.stop(); // تأكد من إيقاف التشغيل الحالي
+    await _audioPlayer.stop();
 
     setState(() {
       currentSong = (currentSong + 1) % songs.length;
     });
 
-    await _audioPlayer
-        .play(AssetSource(songs[currentSong])); // تشغيل الأغنية الجديدة
+    await _audioPlayer.play(AssetSource(songs[currentSong]));
     setState(() {
       _isPlaying = true;
     });
   }
 
   void _prevSong() async {
-    await _audioPlayer.stop(); // تأكد من إيقاف التشغيل الحالي
+    await _audioPlayer.stop();
 
     setState(() {
       currentSong = (currentSong - 1 + songs.length) % songs.length;
     });
 
-    await _audioPlayer
-        .play(AssetSource(songs[currentSong])); // تشغيل الأغنية الجديدة
+    await _audioPlayer.play(AssetSource(songs[currentSong]));
     setState(() {
       _isPlaying = true;
     });
-  }
-
-  void _seekTo(double value) {
-    _audioPlayer.seek(Duration(seconds: value.toInt()));
   }
 
   @override

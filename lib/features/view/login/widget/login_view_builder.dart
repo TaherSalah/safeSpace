@@ -132,7 +132,6 @@ class _LoginViewBuilderState extends StateMVC<LoginViewBuilder> {
                   if (con.loginFormKey.currentState!.validate()) {
                     // You can add your login logic here
                     con.login(context);
-                    print("object");
                   }
                   // Navigator.pushNamed(context, Routes.mainRoute);
                 },

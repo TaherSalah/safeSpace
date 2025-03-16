@@ -97,7 +97,6 @@ class _HeartRateViewBuilderState extends State<HeartRateViewBuilder>
                   );
                 },
               ),
-
               TextDefaultWidget(
                 title: "beats per minute",
                 fontSize: 18.sp,

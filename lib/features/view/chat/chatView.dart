@@ -64,38 +64,6 @@ class ChatBotViewState extends StateMVC<ChatBotView> {
               ),
             ),
           ),
-          // Padding(
-          //   padding: const EdgeInsets.all(8.0),
-          //   child: Row(
-          //     children: [
-          //       Expanded(
-          //         child: TextField(
-          //           controller: con.controller,
-          //           decoration: const InputDecoration(
-          //             hintText: "Speak or type...",
-          //             border: OutlineInputBorder(),
-          //           ),
-          //         ),
-          //       ),
-          //       IconButton(
-          //         icon: Icon(con.isListening ? Icons.mic : Icons.mic_none,
-          //             color: con.isListening ? Colors.red : Colors.black),
-          //         onPressed: () {
-          //           if (con.isListening) {
-          //             con.stopListening();
-          //           } else {
-          //             con.startListening();
-          //           }
-          //           setState(() {});
-          //         },
-          //       ),
-          //       IconButton(
-          //         icon: Icon(Icons.send, color: Colors.blue),
-          //         onPressed: con.sendMessage,
-          //       ),
-          //     ],
-          //   ),
-          // ),
         ],
       ),
     );

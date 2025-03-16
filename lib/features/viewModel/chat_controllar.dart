@@ -103,10 +103,12 @@ class ChatController extends ControllerMVC {
 
 class GPTService {
   final OpenAI _openAI = OpenAI.instance.build(
-    token: "add  a new token ",
+    token: "", //// ADD YOUR TOKEN
+
     baseOption: HttpSetup(receiveTimeout: Duration(seconds: 10)),
     enableLog: true,
   );
+//  flutter build apk     run this after add your token
 
   Future<String> getGPTResponse(String userInput) async {
     final request = ChatCompleteText(
